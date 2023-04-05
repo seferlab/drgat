@@ -1,0 +1,10 @@
+{
+  "drug": "Dabrafenib",
+  "augment_ratio": 0.7,
+  "n_train": 163,
+  "n_test": 24,
+  "test_roc_auc": 0.8907563025210083,
+  "test_pr_auc": 0.9610903056874924,
+  "test_f1": 0.875,
+  "test_acc": 0.8333333333333334
+}

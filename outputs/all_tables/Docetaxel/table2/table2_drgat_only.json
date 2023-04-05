@@ -1,0 +1,22 @@
+{
+  "train_split": "ccle",
+  "test_split": "ctrp",
+  "rows": [
+    {
+      "drug": "MG-132",
+      "pr_auc_drgat": 0.92,
+      "pr_auc_drgat_noaug": 0.86,
+      "roc_auc_drgat": 0.81,
+      "roc_auc_drgat_noaug": 0.71,
+      "n_train": 163,
+      "n_test": 24
+    }
+  ],
+  "params": {
+    "confidence_threshold": 0.7,
+    "k_pathways_ratio": 0.05,
+    "n_boot": 50,
+    "augment_ratio": 0.7
+  },
+  "seed": 42
+}

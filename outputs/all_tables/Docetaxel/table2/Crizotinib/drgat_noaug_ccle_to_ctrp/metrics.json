@@ -1,0 +1,10 @@
+{
+  "drug": "Crizotinib",
+  "augment_ratio": 0.0,
+  "n_train": 96,
+  "n_test": 24,
+  "test_roc_auc": 0.9652777777777778,
+  "test_pr_auc": 0.9614769489769489,
+  "test_f1": 0.96,
+  "test_acc": 0.9583333333333334
+}

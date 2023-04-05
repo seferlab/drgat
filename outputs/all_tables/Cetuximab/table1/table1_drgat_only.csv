@@ -1,0 +1,7 @@
+drug,pdx_auc_drgat,tcga_auc_drgat,pdx_auc_drgat_noaug,tcga_auc_drgat_noaug
+Paclitaxel,0.99,0.99,1.0,1.0
+Cetuximab,0.81,0.81,0.92,0.92
+Erlotinib,0.98,0.98,1.0,1.0
+Docetaxel,1.0,1.0,1.0,1.0
+Cisplatin,0.87,0.87,0.91,0.91
+Gemcitabine,0.98,0.98,0.97,0.97

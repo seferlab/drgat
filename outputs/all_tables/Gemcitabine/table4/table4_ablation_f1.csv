@@ -1,0 +1,8 @@
+drug,variant,pdx_f1,tcga_f1,mean_f1
+Gemcitabine,Latent_Diff_on_AE,0.91,0.84,0.88
+Gemcitabine,Diff_Direct,0.91,0.9,0.91
+Gemcitabine,Latent_Diff_on_VAE,0.83,0.96,0.9
+Gemcitabine,DRGAT_NoFS,1.0,1.0,1.0
+Gemcitabine,DRGAT_NoHO_GAT,0.89,0.85,0.87
+Gemcitabine,DRGAT_NoAug,0.89,0.88,0.89
+Gemcitabine,DRGAT,0.84,0.92,0.88

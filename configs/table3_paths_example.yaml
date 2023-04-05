@@ -1,0 +1,28 @@
+# Example paths for Table 3 (CCLE -> CTRP PR-AUC, continued drugs)
+seed: 42
+device: auto
+
+# Put the drugs you want Table 3 for (the paper continues the CCLE/CTRP table).
+drugs:
+  - Docetaxel
+
+data:
+  train_split: ccle
+  test_split: ctrp
+  splits:
+    ccle:
+      expression: "/path/to/ccle/expression_{drug}.csv"
+      labels: "/path/to/ccle/labels_{drug}.csv"
+    ctrp:
+      expression: "/path/to/ctrp/expression_{drug}.csv"
+      labels: "/path/to/ctrp/labels_{drug}.csv"
+
+  ppi: "/path/to/ppi/ppi_{drug}.csv"
+  pathways: "/path/to/pathways/pathways_{drug}.csv"
+  targets:
+    template: "/path/to/targets/targets_{drug}.csv"
+
+params:
+  confidence_threshold: 0.7
+  k_pathways_ratio: 0.05
+  augment_ratio: 0.7

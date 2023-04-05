@@ -1,0 +1,10 @@
+{
+  "drug": "Bortezomib",
+  "augment_ratio": 0.0,
+  "n_train": 96,
+  "n_test": 24,
+  "test_roc_auc": 0.5142857142857142,
+  "test_pr_auc": 0.7062210037610495,
+  "test_f1": 0.7368421052631579,
+  "test_acc": 0.5833333333333334
+}

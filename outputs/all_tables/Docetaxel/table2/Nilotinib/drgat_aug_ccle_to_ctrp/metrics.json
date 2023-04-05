@@ -1,0 +1,10 @@
+{
+  "drug": "Nilotinib",
+  "augment_ratio": 0.7,
+  "n_train": 163,
+  "n_test": 24,
+  "test_roc_auc": 0.6171875,
+  "test_pr_auc": 0.802413106217454,
+  "test_f1": 0.7096774193548387,
+  "test_acc": 0.625
+}

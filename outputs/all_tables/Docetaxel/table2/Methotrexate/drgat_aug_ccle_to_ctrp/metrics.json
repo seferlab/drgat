@@ -1,0 +1,10 @@
+{
+  "drug": "Methotrexate",
+  "augment_ratio": 0.7,
+  "n_train": 163,
+  "n_test": 24,
+  "test_roc_auc": 0.9444444444444444,
+  "test_pr_auc": 0.9822368762319743,
+  "test_f1": 0.8823529411764706,
+  "test_acc": 0.8333333333333334
+}

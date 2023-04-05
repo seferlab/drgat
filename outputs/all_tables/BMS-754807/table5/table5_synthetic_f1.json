@@ -1,0 +1,46 @@
+{
+  "drug": "BMS-754807",
+  "rows": [
+    {
+      "drug": "BMS-754807",
+      "variant": "DRGAT (with CVAE)",
+      "pdx_f1": 0.88,
+      "tcga_f1": 0.67,
+      "avg_f1": 0.77
+    },
+    {
+      "drug": "BMS-754807",
+      "variant": "DRGAT (with CTGAN)",
+      "pdx_f1": 0.85,
+      "tcga_f1": 0.83,
+      "avg_f1": 0.84
+    },
+    {
+      "drug": "BMS-754807",
+      "variant": "DRGAT (with TVAE)",
+      "pdx_f1": 0.79,
+      "tcga_f1": 0.71,
+      "avg_f1": 0.75
+    },
+    {
+      "drug": "BMS-754807",
+      "variant": "DRGAT (with CopulaGAN)",
+      "pdx_f1": 0.86,
+      "tcga_f1": 0.82,
+      "avg_f1": 0.84
+    },
+    {
+      "drug": "BMS-754807",
+      "variant": "DRGAT",
+      "pdx_f1": 0.84,
+      "tcga_f1": 0.73,
+      "avg_f1": 0.79
+    }
+  ],
+  "params": {
+    "confidence_threshold": 0.7,
+    "k_pathways_ratio": 0.05,
+    "n_boot": 5,
+    "augment_ratio": 0.7
+  }
+}

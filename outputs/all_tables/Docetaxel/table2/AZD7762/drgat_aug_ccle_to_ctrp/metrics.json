@@ -1,0 +1,10 @@
+{
+  "drug": "AZD7762",
+  "augment_ratio": 0.7,
+  "n_train": 163,
+  "n_test": 24,
+  "test_roc_auc": 0.8181818181818182,
+  "test_pr_auc": 0.8298794944305781,
+  "test_f1": 0.7692307692307693,
+  "test_acc": 0.75
+}

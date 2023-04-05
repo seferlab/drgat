@@ -1,0 +1,10 @@
+{
+  "drug": "OSI-930",
+  "augment_ratio": 0.7,
+  "n_train": 163,
+  "n_test": 24,
+  "test_roc_auc": 0.9214285714285714,
+  "test_pr_auc": 0.9442092746189386,
+  "test_f1": 0.9032258064516129,
+  "test_acc": 0.875
+}

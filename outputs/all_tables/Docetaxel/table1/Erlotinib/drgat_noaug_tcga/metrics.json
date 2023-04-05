@@ -1,0 +1,10 @@
+{
+  "drug": "Erlotinib",
+  "augment_ratio": 0.0,
+  "n_train": 96,
+  "n_test": 24,
+  "test_roc_auc": 0.8671875,
+  "test_pr_auc": 0.9430604495142538,
+  "test_f1": 0.8,
+  "test_acc": 0.6666666666666666
+}

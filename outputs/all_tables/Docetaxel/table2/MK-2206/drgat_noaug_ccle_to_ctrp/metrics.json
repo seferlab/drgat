@@ -1,0 +1,10 @@
+{
+  "drug": "MK-2206",
+  "augment_ratio": 0.0,
+  "n_train": 96,
+  "n_test": 24,
+  "test_roc_auc": 0.6814814814814816,
+  "test_pr_auc": 0.7964125488038531,
+  "test_f1": 0.75,
+  "test_acc": 0.6666666666666666
+}

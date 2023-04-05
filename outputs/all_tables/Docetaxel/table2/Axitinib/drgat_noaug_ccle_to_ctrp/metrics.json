@@ -1,0 +1,10 @@
+{
+  "drug": "Axitinib",
+  "augment_ratio": 0.0,
+  "n_train": 96,
+  "n_test": 24,
+  "test_roc_auc": 0.9579831932773109,
+  "test_pr_auc": 0.9853353105948262,
+  "test_f1": 0.9375,
+  "test_acc": 0.9166666666666666
+}

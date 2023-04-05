@@ -1,0 +1,10 @@
+{
+  "drug": "BMS-754807",
+  "augment_ratio": 0.7,
+  "n_train": 163,
+  "n_test": 24,
+  "test_roc_auc": 0.8,
+  "test_pr_auc": 0.8727454952454953,
+  "test_f1": 0.8125,
+  "test_acc": 0.75
+}

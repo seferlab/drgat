@@ -1,0 +1,32 @@
+# Example paths for Table 5 (Synthetic data augmentation baselines; train on GDSC, evaluate on PDX/TCGA with F1)
+seed: 42
+device: auto
+
+data:
+  train_split: gdsc
+  test_splits:
+    pdx: pdx
+    tcga: tcga
+
+  splits:
+    gdsc:
+      expression: "/path/to/gdsc/expression_{drug}.csv"
+      labels: "/path/to/gdsc/labels_{drug}.csv"
+    pdx:
+      expression: "/path/to/pdx/expression_{drug}.csv"
+      labels: "/path/to/pdx/labels_{drug}.csv"
+    tcga:
+      expression: "/path/to/tcga/expression_{drug}.csv"
+      labels: "/path/to/tcga/labels_{drug}.csv"
+
+  ppi: "/path/to/ppi/ppi_{drug}.csv"
+  pathways: "/path/to/pathways/pathways_{drug}.csv"
+  targets:
+    template: "/path/to/targets/targets_{drug}.csv"
+
+params:
+  confidence_threshold: 0.7
+  k_pathways_ratio: 0.05
+  n_boot: 5
+  augment_ratio: 0.7
+  # predictor_type: hogat  # or simple_gat

@@ -1,0 +1,10 @@
+{
+  "drug": "Masitinib",
+  "augment_ratio": 0.7,
+  "n_train": 163,
+  "n_test": 24,
+  "test_roc_auc": 0.6962962962962963,
+  "test_pr_auc": 0.829807156780841,
+  "test_f1": 0.5714285714285714,
+  "test_acc": 0.625
+}

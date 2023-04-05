@@ -1,0 +1,8 @@
+drug,variant,pdx_f1,tcga_f1,mean_f1
+Paclitaxel,Latent_Diff_on_AE,0.8,0.9,0.85
+Paclitaxel,Diff_Direct,0.71,0.77,0.74
+Paclitaxel,Latent_Diff_on_VAE,0.94,0.76,0.85
+Paclitaxel,DRGAT_NoFS,0.94,0.8,0.87
+Paclitaxel,DRGAT_NoHO_GAT,0.81,0.85,0.83
+Paclitaxel,DRGAT_NoAug,0.83,0.93,0.88
+Paclitaxel,DRGAT,0.88,0.87,0.87

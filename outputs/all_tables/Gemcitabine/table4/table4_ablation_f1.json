@@ -1,0 +1,60 @@
+{
+  "drug": "Gemcitabine",
+  "rows": [
+    {
+      "drug": "Gemcitabine",
+      "variant": "Latent_Diff_on_AE",
+      "pdx_f1": 0.91,
+      "tcga_f1": 0.84,
+      "mean_f1": 0.88
+    },
+    {
+      "drug": "Gemcitabine",
+      "variant": "Diff_Direct",
+      "pdx_f1": 0.91,
+      "tcga_f1": 0.9,
+      "mean_f1": 0.91
+    },
+    {
+      "drug": "Gemcitabine",
+      "variant": "Latent_Diff_on_VAE",
+      "pdx_f1": 0.83,
+      "tcga_f1": 0.96,
+      "mean_f1": 0.9
+    },
+    {
+      "drug": "Gemcitabine",
+      "variant": "DRGAT_NoFS",
+      "pdx_f1": 1.0,
+      "tcga_f1": 1.0,
+      "mean_f1": 1.0
+    },
+    {
+      "drug": "Gemcitabine",
+      "variant": "DRGAT_NoHO_GAT",
+      "pdx_f1": 0.89,
+      "tcga_f1": 0.85,
+      "mean_f1": 0.87
+    },
+    {
+      "drug": "Gemcitabine",
+      "variant": "DRGAT_NoAug",
+      "pdx_f1": 0.89,
+      "tcga_f1": 0.88,
+      "mean_f1": 0.89
+    },
+    {
+      "drug": "Gemcitabine",
+      "variant": "DRGAT",
+      "pdx_f1": 0.84,
+      "tcga_f1": 0.92,
+      "mean_f1": 0.88
+    }
+  ],
+  "params": {
+    "confidence_threshold": 0.7,
+    "k_pathways_ratio": 0.05,
+    "n_boot": 5,
+    "augment_ratio": 0.7
+  }
+}

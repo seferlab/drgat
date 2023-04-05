@@ -1,0 +1,60 @@
+{
+  "drug": "Paclitaxel",
+  "rows": [
+    {
+      "drug": "Paclitaxel",
+      "variant": "Latent_Diff_on_AE",
+      "pdx_f1": 0.8,
+      "tcga_f1": 0.9,
+      "mean_f1": 0.85
+    },
+    {
+      "drug": "Paclitaxel",
+      "variant": "Diff_Direct",
+      "pdx_f1": 0.71,
+      "tcga_f1": 0.77,
+      "mean_f1": 0.74
+    },
+    {
+      "drug": "Paclitaxel",
+      "variant": "Latent_Diff_on_VAE",
+      "pdx_f1": 0.94,
+      "tcga_f1": 0.76,
+      "mean_f1": 0.85
+    },
+    {
+      "drug": "Paclitaxel",
+      "variant": "DRGAT_NoFS",
+      "pdx_f1": 0.94,
+      "tcga_f1": 0.8,
+      "mean_f1": 0.87
+    },
+    {
+      "drug": "Paclitaxel",
+      "variant": "DRGAT_NoHO_GAT",
+      "pdx_f1": 0.81,
+      "tcga_f1": 0.85,
+      "mean_f1": 0.83
+    },
+    {
+      "drug": "Paclitaxel",
+      "variant": "DRGAT_NoAug",
+      "pdx_f1": 0.83,
+      "tcga_f1": 0.93,
+      "mean_f1": 0.88
+    },
+    {
+      "drug": "Paclitaxel",
+      "variant": "DRGAT",
+      "pdx_f1": 0.88,
+      "tcga_f1": 0.87,
+      "mean_f1": 0.87
+    }
+  ],
+  "params": {
+    "confidence_threshold": 0.7,
+    "k_pathways_ratio": 0.05,
+    "n_boot": 5,
+    "augment_ratio": 0.7
+  }
+}

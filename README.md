@@ -28,12 +28,19 @@ python run_pipeline_data.py download --zenodo-record 4036592 --data-dir data/raw
 ### Example command
 
 ```bash
-python run_pipeline.py --drug Docetaxel
-python run_pipeline.py --drug Gemcitabine
-python run_pipeline.py --drug Erlotinib
-python run_pipeline.py --drug Paclitaxel
-python run_pipeline.py --drug Cetuximab
-python run_pipeline.py --drug Cisplatin
+python run_train_and_eval_drgat.py \
+  --drug Docetaxel \
+  --train-expr /path/to/gdsc_expr.csv --train-labels /path/to/gdsc_labels.csv \
+  --test-expr  /path/to/pdx_expr.csv  --test-labels  /path/to/pdx_labels.csv \
+  --ppi /path/to/ppi.csv --pathways /path/to/pathways.csv \
+  --augment-ratio 0.7 --aug-method latent_ae --predictor-type hogat \
+  --out-dir outputs/custom_run
+
+python run_pipeline.py --style 1 --table1-config configs/table1_paths_example.yaml
+python run_pipeline.py --style 2 --table2-config configs/table2_paths_example.yaml
+python run_pipeline.py --style 4 --table4-config configs/table4_paths_example.yaml
+python run_pipeline.py --style 5 --table5-config configs/table5_paths_example.yaml
+python generate_table6.py --output-dir outputs/table6
 ```
 
 ```bash

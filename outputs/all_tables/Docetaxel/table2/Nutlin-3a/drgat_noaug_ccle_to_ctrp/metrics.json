@@ -1,0 +1,10 @@
+{
+  "drug": "Nutlin-3a",
+  "augment_ratio": 0.0,
+  "n_train": 96,
+  "n_test": 24,
+  "test_roc_auc": 0.993006993006993,
+  "test_pr_auc": 0.9945054945054945,
+  "test_f1": 0.9166666666666666,
+  "test_acc": 0.9166666666666666
+}

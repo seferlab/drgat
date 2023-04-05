@@ -1,0 +1,10 @@
+{
+  "drug": "Parthenolide",
+  "augment_ratio": 0.7,
+  "n_train": 163,
+  "n_test": 24,
+  "test_roc_auc": 0.7000000000000001,
+  "test_pr_auc": 0.8368765292678336,
+  "test_f1": 0.7058823529411765,
+  "test_acc": 0.5833333333333334
+}

@@ -1,0 +1,29 @@
+
+seed: 42
+device: auto
+
+data:
+  drugs: ["Docetaxel", "Paclitaxel", "Cetuximab", "Erlotinib", "Cisplatin", "Gemcitabine"]
+
+  splits:
+    gdsc:
+      expression: "data/moli/gdsc/expression_{drug}.csv"
+      labels:     "data/moli/gdsc/labels_{drug}.csv"
+    pdx:
+      expression: "data/moli/pdx/expression_{drug}.csv"
+      labels:     "data/moli/pdx/labels_{drug}.csv"
+    tcga:
+      expression: "data/moli/tcga/expression_{drug}.csv"
+      labels:     "data/moli/tcga/labels_{drug}.csv"
+
+  ppi: "data/moli/string_ppi.csv"
+  pathways: "data/moli/kegg_pathways.csv"
+
+  targets:
+    template: "data/moli/targets/{drug}.txt"
+
+params:
+  confidence_threshold: 0.7
+  k_pathways_ratio: 0.05
+  n_boot: 50
+  augment_ratio: 0.7

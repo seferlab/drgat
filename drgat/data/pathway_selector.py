@@ -67,4 +67,5 @@ class PathwaySelector:
         gene_set = sorted({g for pid in selected for g in self.pathways[pid] if g in self.G})
         # distances for readout weighting: inverse distance proxy per pathway (avoid div0)
         distances = {pid: max(1.0, obs[pid]) for pid in selected}
+
         return selected, gene_set, distances

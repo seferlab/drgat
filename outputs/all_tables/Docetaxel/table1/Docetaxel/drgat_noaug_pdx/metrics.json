@@ -1,0 +1,10 @@
+{
+  "drug": "Docetaxel",
+  "augment_ratio": 0.0,
+  "n_train": 96,
+  "n_test": 24,
+  "test_roc_auc": 0.692857142857143,
+  "test_pr_auc": 0.6435280947123052,
+  "test_f1": 0.5882352941176471,
+  "test_acc": 0.4166666666666667
+}

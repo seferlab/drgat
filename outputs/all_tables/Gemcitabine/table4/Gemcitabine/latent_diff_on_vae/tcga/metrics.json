@@ -1,0 +1,10 @@
+{
+  "drug": "Gemcitabine",
+  "augment_ratio": 0.7,
+  "n_train": 272,
+  "n_test": 40,
+  "test_roc_auc": 0.9766483516483517,
+  "test_pr_auc": 0.9848390702734128,
+  "test_f1": 0.9629629629629629,
+  "test_acc": 0.95
+}

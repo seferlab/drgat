@@ -1,0 +1,2 @@
+drug,pr_auc_drgat,pr_auc_drgat_noaug,roc_auc_drgat,roc_auc_drgat_noaug,n_train,n_test
+MG-132,0.92,0.86,0.81,0.71,163,24

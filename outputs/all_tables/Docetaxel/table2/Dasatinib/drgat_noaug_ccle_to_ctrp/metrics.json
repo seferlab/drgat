@@ -1,0 +1,10 @@
+{
+  "drug": "Dasatinib",
+  "augment_ratio": 0.0,
+  "n_train": 96,
+  "n_test": 24,
+  "test_roc_auc": 0.9357142857142857,
+  "test_pr_auc": 0.9016991341991343,
+  "test_f1": 0.9090909090909091,
+  "test_acc": 0.9166666666666666
+}

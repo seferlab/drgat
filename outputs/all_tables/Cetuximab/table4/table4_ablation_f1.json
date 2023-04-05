@@ -1,0 +1,33 @@
+{
+  "drug": "Cetuximab",
+  "rows": [
+    {
+      "drug": "Cetuximab",
+      "variant": "DRGAT_NoHO_GAT",
+      "pdx_f1": 0.7965116279069767,
+      "tcga_f1": 0.7965116279069767,
+      "mean_f1": 0.7965116279069767
+    },
+    {
+      "drug": "Cetuximab",
+      "variant": "DRGAT_NoAug",
+      "pdx_f1": 0.7890818858560794,
+      "tcga_f1": 0.7890818858560794,
+      "mean_f1": 0.7890818858560794
+    },
+    {
+      "drug": "Cetuximab",
+      "variant": "DRGAT",
+      "pdx_f1": 0.7965116279069767,
+      "tcga_f1": 0.7965116279069767,
+      "mean_f1": 0.7965116279069767
+    }
+  ],
+  "params": {
+    "confidence_threshold": 0.7,
+    "k_pathways_ratio": 0.05,
+    "n_boot": 5,
+    "augment_ratio": 0.7
+  },
+  "seed": 42
+}

@@ -1,0 +1,10 @@
+{
+  "drug": "Etoposide",
+  "augment_ratio": 0.7,
+  "n_train": 163,
+  "n_test": 24,
+  "test_roc_auc": 0.9444444444444444,
+  "test_pr_auc": 0.9495670995670995,
+  "test_f1": 0.8181818181818182,
+  "test_acc": 0.8333333333333334
+}

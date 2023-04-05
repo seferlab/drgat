@@ -1,0 +1,10 @@
+{
+  "drug": "GW843682X",
+  "augment_ratio": 0.0,
+  "n_train": 96,
+  "n_test": 24,
+  "test_roc_auc": 0.8194444444444444,
+  "test_pr_auc": 0.8842845750740488,
+  "test_f1": 0.72,
+  "test_acc": 0.7083333333333334
+}

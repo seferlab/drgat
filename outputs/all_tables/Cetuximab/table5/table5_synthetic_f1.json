@@ -1,0 +1,33 @@
+{
+  "drug": "Cetuximab",
+  "rows": [
+    {
+      "drug": "Cetuximab",
+      "variant": "DRGAT (with CVAE)",
+      "pdx_f1": 0.78,
+      "tcga_f1": 0.78,
+      "avg_f1": 0.78
+    },
+    {
+      "drug": "Cetuximab",
+      "variant": "DRGAT (with CTGAN)",
+      "pdx_f1": 0.78,
+      "tcga_f1": 0.78,
+      "avg_f1": 0.78
+    },
+    {
+      "drug": "Cetuximab",
+      "variant": "DRGAT",
+      "pdx_f1": 0.78,
+      "tcga_f1": 0.78,
+      "avg_f1": 0.78
+    }
+  ],
+  "params": {
+    "confidence_threshold": 0.7,
+    "k_pathways_ratio": 0.05,
+    "n_boot": 5,
+    "augment_ratio": 0.7
+  },
+  "seed": 42
+}

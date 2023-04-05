@@ -1,0 +1,98 @@
+seed: 42
+device: auto
+
+params:
+  confidence_threshold: 0.7
+  k_pathways_ratio: 0.05
+  n_boot: 50
+  augment_ratio: 0.7
+
+data:
+  train_split: ccle
+  test_split: ctrp
+
+  drugs:
+    - 17-AAG
+    - Afatinib
+    - Axitinib
+    - AZD7762
+    - AZD8055
+    - BI-2536
+    - Bleomycin
+    - BMS-345541
+    - BMS-754807
+    - Bortezomib
+    - Bosutinib
+    - CAL-101
+    - Crizotinib
+    - Cytarabine
+    - Dabrafenib
+    - Dasatinib
+    - Docetaxel
+    - Doxorubicin
+    - Erlotinib
+    - Etoposide
+    - EX-527
+    - GDC0941
+    - Gefitinib
+    - Gemcitabine
+    - GW843682X
+    - Imatinib
+    - JNJ-26854165
+    - KU-55933
+    - Lapatinib
+    - Masitinib
+    - Methotrexate
+    - MG-132
+    - Mitomycin C
+    - MK-2206
+    - Nilotinib
+    - Nutlin-3a
+    - NVP-BEZ235
+    - NVP-TAE684
+    - OSI-027
+
+    - OSI-930
+    - PLX4720
+    - PAC-1
+    - Paclitaxel
+    - Parthenolide
+    - Pazopanib
+    - PD-0325901
+    - PD-0332991
+    - PHA-665752
+    - PHA-793887
+    - PI-103
+    - PIK-93
+    - Piperlongumine
+    - PLX4720
+    - Ruxolitinib
+    - SN-38
+    - SNX-2112
+    - Sorafenib
+    - Sunitinib
+    - Tamoxifen
+    - Temozolomide
+    - Temsirolimus
+    - TG101348
+    - TGX221
+    - TPCA-1
+    - Trametinib
+    - Tubastatin
+    - TW 37
+    - Vorinostat
+    - VX-680
+    - YK 4-279
+    - YM155
+    - ZSTK474
+
+  ppi: /path/to/ppi_edges.csv
+  pathways: /path/to/pathways.csv
+
+  splits:
+    ccle:
+      expression: /path/to/ccle_expression_{drug}.csv
+      labels: /path/to/ccle_labels_{drug}.csv
+    ctrp:
+      expression: /path/to/ctrp_expression_{drug}.csv
+      labels: /path/to/ctrp_labels_{drug}.csv

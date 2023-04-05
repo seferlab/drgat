@@ -1,0 +1,6 @@
+drug,variant,pdx_f1,tcga_f1,avg_f1
+Docetaxel,DRGAT (with CVAE),0.78,0.64,0.71
+Docetaxel,DRGAT (with CTGAN),0.7,0.83,0.76
+Docetaxel,DRGAT (with TVAE),0.77,0.8,0.78
+Docetaxel,DRGAT (with CopulaGAN),0.8,0.75,0.78
+Docetaxel,DRGAT,0.67,0.73,0.7

@@ -1,0 +1,60 @@
+{
+  "drug": "BMS-754807",
+  "rows": [
+    {
+      "drug": "BMS-754807",
+      "variant": "Latent_Diff_on_AE",
+      "pdx_f1": 0.8,
+      "tcga_f1": 0.76,
+      "mean_f1": 0.78
+    },
+    {
+      "drug": "BMS-754807",
+      "variant": "Diff_Direct",
+      "pdx_f1": 0.77,
+      "tcga_f1": 0.62,
+      "mean_f1": 0.69
+    },
+    {
+      "drug": "BMS-754807",
+      "variant": "Latent_Diff_on_VAE",
+      "pdx_f1": 0.87,
+      "tcga_f1": 0.86,
+      "mean_f1": 0.86
+    },
+    {
+      "drug": "BMS-754807",
+      "variant": "DRGAT_NoFS",
+      "pdx_f1": 0.77,
+      "tcga_f1": 0.69,
+      "mean_f1": 0.73
+    },
+    {
+      "drug": "BMS-754807",
+      "variant": "DRGAT_NoHO_GAT",
+      "pdx_f1": 0.86,
+      "tcga_f1": 0.78,
+      "mean_f1": 0.82
+    },
+    {
+      "drug": "BMS-754807",
+      "variant": "DRGAT_NoAug",
+      "pdx_f1": 0.77,
+      "tcga_f1": 0.75,
+      "mean_f1": 0.76
+    },
+    {
+      "drug": "BMS-754807",
+      "variant": "DRGAT",
+      "pdx_f1": 0.83,
+      "tcga_f1": 0.78,
+      "mean_f1": 0.81
+    }
+  ],
+  "params": {
+    "confidence_threshold": 0.7,
+    "k_pathways_ratio": 0.05,
+    "n_boot": 5,
+    "augment_ratio": 0.7
+  }
+}

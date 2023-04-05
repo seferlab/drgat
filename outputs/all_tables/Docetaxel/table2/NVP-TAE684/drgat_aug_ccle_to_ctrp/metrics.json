@@ -1,0 +1,10 @@
+{
+  "drug": "NVP-TAE684",
+  "augment_ratio": 0.7,
+  "n_train": 163,
+  "n_test": 24,
+  "test_roc_auc": 0.7185185185185186,
+  "test_pr_auc": 0.8164126808863651,
+  "test_f1": 0.8333333333333334,
+  "test_acc": 0.75
+}

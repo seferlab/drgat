@@ -1,0 +1,33 @@
+{
+  "drug": "Cisplatin",
+  "rows": [
+    {
+      "drug": "Cisplatin",
+      "variant": "DRGAT_NoHO_GAT",
+      "pdx_f1": 0.8926174496644296,
+      "tcga_f1": 0.8926174496644296,
+      "mean_f1": 0.8926174496644296
+    },
+    {
+      "drug": "Cisplatin",
+      "variant": "DRGAT_NoAug",
+      "pdx_f1": 0.6527415143603134,
+      "tcga_f1": 0.6527415143603134,
+      "mean_f1": 0.6527415143603134
+    },
+    {
+      "drug": "Cisplatin",
+      "variant": "DRGAT",
+      "pdx_f1": 0.8926174496644296,
+      "tcga_f1": 0.8926174496644296,
+      "mean_f1": 0.8926174496644296
+    }
+  ],
+  "params": {
+    "confidence_threshold": 0.7,
+    "k_pathways_ratio": 0.05,
+    "n_boot": 5,
+    "augment_ratio": 0.7
+  },
+  "seed": 42
+}

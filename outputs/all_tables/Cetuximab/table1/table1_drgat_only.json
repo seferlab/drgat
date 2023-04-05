@@ -1,0 +1,53 @@
+{
+  "rows": [
+    {
+      "drug": "Paclitaxel",
+      "pdx_auc_drgat": 0.99,
+      "tcga_auc_drgat": 0.99,
+      "pdx_auc_drgat_noaug": 1.0,
+      "tcga_auc_drgat_noaug": 1.0
+    },
+    {
+      "drug": "Cetuximab",
+      "pdx_auc_drgat": 0.81,
+      "tcga_auc_drgat": 0.81,
+      "pdx_auc_drgat_noaug": 0.92,
+      "tcga_auc_drgat_noaug": 0.92
+    },
+    {
+      "drug": "Erlotinib",
+      "pdx_auc_drgat": 0.98,
+      "tcga_auc_drgat": 0.98,
+      "pdx_auc_drgat_noaug": 1.0,
+      "tcga_auc_drgat_noaug": 1.0
+    },
+    {
+      "drug": "Docetaxel",
+      "pdx_auc_drgat": 1.0,
+      "tcga_auc_drgat": 1.0,
+      "pdx_auc_drgat_noaug": 1.0,
+      "tcga_auc_drgat_noaug": 1.0
+    },
+    {
+      "drug": "Cisplatin",
+      "pdx_auc_drgat": 0.87,
+      "tcga_auc_drgat": 0.87,
+      "pdx_auc_drgat_noaug": 0.91,
+      "tcga_auc_drgat_noaug": 0.91
+    },
+    {
+      "drug": "Gemcitabine",
+      "pdx_auc_drgat": 0.98,
+      "tcga_auc_drgat": 0.98,
+      "pdx_auc_drgat_noaug": 0.97,
+      "tcga_auc_drgat_noaug": 0.97
+    }
+  ],
+  "params": {
+    "confidence_threshold": 0.7,
+    "k_pathways_ratio": 0.05,
+    "n_boot": 50,
+    "augment_ratio": 0.7
+  },
+  "seed": 42
+}

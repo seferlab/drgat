@@ -1,0 +1,10 @@
+{
+  "drug": "Lapatinib",
+  "augment_ratio": 0.7,
+  "n_train": 163,
+  "n_test": 24,
+  "test_roc_auc": 0.8993055555555556,
+  "test_pr_auc": 0.8998439060939061,
+  "test_f1": 0.8148148148148148,
+  "test_acc": 0.7916666666666666
+}

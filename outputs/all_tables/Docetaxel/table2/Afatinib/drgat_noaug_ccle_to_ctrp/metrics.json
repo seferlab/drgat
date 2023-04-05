@@ -1,0 +1,10 @@
+{
+  "drug": "Afatinib",
+  "augment_ratio": 0.0,
+  "n_train": 96,
+  "n_test": 24,
+  "test_roc_auc": 0.45138888888888884,
+  "test_pr_auc": 0.5479314502769881,
+  "test_f1": 0.6666666666666666,
+  "test_acc": 0.5
+}

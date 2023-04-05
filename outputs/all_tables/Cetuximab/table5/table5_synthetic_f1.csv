@@ -1,0 +1,4 @@
+drug,variant,pdx_f1,tcga_f1,avg_f1
+Cetuximab,DRGAT (with CVAE),0.78,0.78,0.78
+Cetuximab,DRGAT (with CTGAN),0.78,0.78,0.78
+Cetuximab,DRGAT,0.78,0.78,0.78

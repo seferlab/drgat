@@ -1,0 +1,54 @@
+{
+  "drug": "Docetaxel",
+  "outputs": {
+    "table5": {
+      "dir": "outputs/all_tables/Docetaxel/table5",
+      "summary": {
+        "drug": "Docetaxel",
+        "rows": [
+          {
+            "drug": "Docetaxel",
+            "variant": "DRGAT (with CVAE)",
+            "pdx_f1": 0.78,
+            "tcga_f1": 0.64,
+            "avg_f1": 0.71
+          },
+          {
+            "drug": "Docetaxel",
+            "variant": "DRGAT (with CTGAN)",
+            "pdx_f1": 0.7,
+            "tcga_f1": 0.83,
+            "avg_f1": 0.76
+          },
+          {
+            "drug": "Docetaxel",
+            "variant": "DRGAT (with TVAE)",
+            "pdx_f1": 0.77,
+            "tcga_f1": 0.8,
+            "avg_f1": 0.78
+          },
+          {
+            "drug": "Docetaxel",
+            "variant": "DRGAT (with CopulaGAN)",
+            "pdx_f1": 0.8,
+            "tcga_f1": 0.75,
+            "avg_f1": 0.78
+          },
+          {
+            "drug": "Docetaxel",
+            "variant": "DRGAT",
+            "pdx_f1": 0.67,
+            "tcga_f1": 0.73,
+            "avg_f1": 0.7
+          }
+        ],
+        "params": {
+          "confidence_threshold": 0.7,
+          "k_pathways_ratio": 0.05,
+          "n_boot": 5,
+          "augment_ratio": 0.7
+        }
+      }
+    }
+  }
+}

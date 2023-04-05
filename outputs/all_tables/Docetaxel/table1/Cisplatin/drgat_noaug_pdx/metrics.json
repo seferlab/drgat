@@ -1,0 +1,10 @@
+{
+  "drug": "Cisplatin",
+  "augment_ratio": 0.0,
+  "n_train": 96,
+  "n_test": 24,
+  "test_roc_auc": 0.8,
+  "test_pr_auc": 0.8211137449295344,
+  "test_f1": 0.8333333333333334,
+  "test_acc": 0.75
+}

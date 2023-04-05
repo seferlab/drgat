@@ -1,79 +1,84 @@
 #!/usr/bin/env python3
-import argparse, os, json, random, numpy as np, torch
+from __future__ import annotations
+
+import argparse
+import json
 from pathlib import Path
-from drgat.data.datasets import load_expression_labels, read_data
-from drgat.data.pathway_selector import PathwaySelector
-from drgat.utils.ppi import load_ppi_graph
-from drgat.train.train_drgat import train_full_pipeline
-from drgat.eval.metrics import set_seed
+
+import yaml
+
+import generate_table1
+import generate_table2
+import generate_table3
+import generate_table4
+import generate_table5
+
 
 def parse_args():
-    p = argparse.ArgumentParser(description="DRGAT end-to-end pipeline")
-    p.add_argument("--mode", choices=["toy","real"], default="real")
-    p.add_argument("--train-expression", type=str, default=None)
-    p.add_argument("--train-labels", type=str, default=None)
-    p.add_argument("--test-expression", type=str, default=None)
-    p.add_argument("--test-labels", type=str, default=None)
-    p.add_argument("--ppi", type=str, default=None)
-    p.add_argument("--pathways", type=str, default=None)
-    p.add_argument("--drug", type=str, default="Docetaxel")
-    p.add_argument("--target-genes", type=str, default=None, help="Comma-separated drug target genes (optional, used in proximity)")
-    p.add_argument("--confidence-threshold", type=float, default=0.7)
-    p.add_argument("--k-pathways-ratio", type=float, default=0.05, help="Select top-K ratio of pathways per drug")
-    p.add_argument("--augment-ratio", type=float, default=0.7, help="Synthetic samples as fraction of total real per-class")
-    p.add_argument("--output-dir", type=str, default="./outputs/run")
-    p.add_argument("--seed", type=int, default=42)
+    p = argparse.ArgumentParser(
+        description="Run DRGAT pipeline to generate Tables 1–4 (DRGAT-side results) for a single drug."
+    )
+    p.add_argument("--drug", type=str, default="Docetaxel", help="Drug name, e.g., Docetaxel")
+    p.add_argument("--output-dir", type=str, default="outputs/all_tables", help="Root output directory")
+    p.add_argument("--table1-config", type=str, default="configs/table1_paths_example.yaml")
+    p.add_argument("--table2-config", type=str, default="configs/table2_paths_example.yaml")
+    p.add_argument("--table3-config", type=str, default="configs/table3_paths_example.yaml")
+    p.add_argument("--table4-config", type=str, default="configs/table4_paths_example.yaml")
+    p.add_argument("--table5-config", type=str, default="configs/table5_paths_example.yaml")
+    p.add_argument("--skip", nargs="*", default=[], choices=["1", "2", "3", "4", "5"], help="Skip specific tables")
+    p.add_argument("--style", type=str, default="1")
     return p.parse_args()
+
+
+def _load_yaml(p: str) -> dict:
+    path = Path(p)
+    if not path.exists():
+        raise FileNotFoundError(
+            f"Config not found: {p}. Please edit the example configs under ./configs/ to point to your data."
+        )
+    return yaml.safe_load(path.read_text())
+
 
 def main():
     args = parse_args()
-    set_seed(args.seed)
-    os.makedirs(args.output_dir, exist_ok=True)
+    out_root = Path(args.output_dir) / args.drug
+    out_root.mkdir(parents=True, exist_ok=True)
 
-    if args.mode == "real":
-        #expr_df, labels_df, ppi_df, pathways_df, target_genes = make_toy_data()
-        expr_df, labels_df, ppi_df, pathways_df, target_genes = read_data(args.drug)
-        drug = labels_df["drug"].unique()[0]
-    else:
-        assert args.train_expression and args.train_labels and args.ppi and args.pathways, "Missing required real-data paths."
-        expr_df, labels_df = load_expression_labels(args.train_expression, args.train_labels, drug=args.drug)
-        ppi_df = None
-        import pandas as pd
-        ppi_df = pd.read_csv(args.ppi)
-        pathways_df = pd.read_csv(args.pathways)
-        drug = args.drug
-        target_genes = [g.strip() for g in (args.target_genes.split(",") if args.target_genes else [])]
+    results = {"drug": args.drug, "outputs": {}}
 
-    # Build PPI graph
-    G = load_ppi_graph(ppi_df, confidence_threshold=args.confidence_threshold, take_lcc=True)
-    
-    # Pathway selection (z-score proximity to drug targets)
-    selector = PathwaySelector(G, pathways_df)
-    selected_pathways, gene_set, distances = selector.select_for_drug(
-        drug=drug,
-        target_genes=target_genes,
-        k_ratio=args.k_pathways_ratio,
-        n_boot=5
-    )
+    if args.style == "1":
+        cfg1 = _load_yaml(args.table1_config)
+        out1 = out_root / "table1"
+        out = generate_table1.run(cfg1, out1, drug_filter=args.drug)
+        results["outputs"]["table1"] = {"dir": str(out1), "summary": out}
 
-    # Train pipeline
-    results = train_full_pipeline(
-        expression_df=expr_df,
-        labels_df=labels_df,
-        drug=drug,
-        G=G,
-        pathways_df=pathways_df,
-        selected_pathways=selected_pathways,
-        gene_set=gene_set,
-        distances=distances,
-        output_dir=args.output_dir,
-        augment_ratio=args.augment_ratio,
-        seed=args.seed,
-    )
+    if args.style == "2":
+        cfg2 = _load_yaml(args.table2_config)
+        out2 = out_root / "table2"
+        out = generate_table2.run(cfg2, out2, drug_filter=args.drug)
+        results["outputs"]["table2"] = {"dir": str(out2), "summary": out}
 
-    with open(os.path.join(args.output_dir, "results.json"), "w") as f:
-        json.dump(results, f, indent=2)
+    if args.style == "3":
+        cfg3 = _load_yaml(args.table3_config)
+        out3 = out_root / "table3"
+        out = generate_table3.run(cfg3, out3, drug_filter=args.drug)
+        results["outputs"]["table3"] = {"dir": str(out3), "summary": out}
+
+    if args.style == "4":
+        cfg4 = _load_yaml(args.table4_config)
+        out4 = out_root / "table4"
+        out = generate_table4.run(cfg4, out4, drug_filter=args.drug)
+        results["outputs"]["table4"] = {"dir": str(out4), "summary": out}
+
+    if args.style == "5":
+        cfg5 = _load_yaml(args.table5_config)
+        out5 = out_root / "table5"
+        out = generate_table5.run(cfg5, out5, drug_filter=args.drug)
+        results["outputs"]["table5"] = {"dir": str(out5), "summary": out}
+
+    (out_root / "all_tables_summary.json").write_text(json.dumps(results, indent=2))
     print(json.dumps(results, indent=2))
+
 
 if __name__ == "__main__":
     main()

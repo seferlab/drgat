@@ -1,0 +1,10 @@
+{
+  "drug": "Cetuximab",
+  "augment_ratio": 0.7,
+  "n_train": 510,
+  "n_test": 300,
+  "test_roc_auc": 0.8873744619799138,
+  "test_pr_auc": 0.9098780855941354,
+  "test_f1": 0.7922077922077922,
+  "test_acc": 0.7866666666666666
+}

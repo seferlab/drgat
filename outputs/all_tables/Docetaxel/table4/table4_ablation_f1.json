@@ -1,0 +1,60 @@
+{
+  "drug": "Docetaxel",
+  "rows": [
+    {
+      "drug": "Docetaxel",
+      "variant": "Latent_Diff_on_AE",
+      "pdx_f1": 0.94,
+      "tcga_f1": 0.7,
+      "mean_f1": 0.82
+    },
+    {
+      "drug": "Docetaxel",
+      "variant": "Diff_Direct",
+      "pdx_f1": 0.88,
+      "tcga_f1": 0.81,
+      "mean_f1": 0.84
+    },
+    {
+      "drug": "Docetaxel",
+      "variant": "Latent_Diff_on_VAE",
+      "pdx_f1": 0.64,
+      "tcga_f1": 0.79,
+      "mean_f1": 0.71
+    },
+    {
+      "drug": "Docetaxel",
+      "variant": "DRGAT_NoFS",
+      "pdx_f1": 0.94,
+      "tcga_f1": 0.73,
+      "mean_f1": 0.83
+    },
+    {
+      "drug": "Docetaxel",
+      "variant": "DRGAT_NoHO_GAT",
+      "pdx_f1": 0.74,
+      "tcga_f1": 0.83,
+      "mean_f1": 0.79
+    },
+    {
+      "drug": "Docetaxel",
+      "variant": "DRGAT_NoAug",
+      "pdx_f1": 0.76,
+      "tcga_f1": 0.75,
+      "mean_f1": 0.75
+    },
+    {
+      "drug": "Docetaxel",
+      "variant": "DRGAT",
+      "pdx_f1": 0.91,
+      "tcga_f1": 0.67,
+      "mean_f1": 0.79
+    }
+  ],
+  "params": {
+    "confidence_threshold": 0.7,
+    "k_pathways_ratio": 0.05,
+    "n_boot": 5,
+    "augment_ratio": 0.7
+  }
+}

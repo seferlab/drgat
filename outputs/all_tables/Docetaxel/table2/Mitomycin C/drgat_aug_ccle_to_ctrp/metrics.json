@@ -1,0 +1,10 @@
+{
+  "drug": "Mitomycin C",
+  "augment_ratio": 0.7,
+  "n_train": 163,
+  "n_test": 24,
+  "test_roc_auc": 0.7851851851851852,
+  "test_pr_auc": 0.8663357013357014,
+  "test_f1": 0.7741935483870968,
+  "test_acc": 0.7083333333333334
+}

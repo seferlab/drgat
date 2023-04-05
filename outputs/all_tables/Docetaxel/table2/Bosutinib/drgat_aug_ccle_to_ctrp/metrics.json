@@ -1,0 +1,10 @@
+{
+  "drug": "Bosutinib",
+  "augment_ratio": 0.7,
+  "n_train": 163,
+  "n_test": 24,
+  "test_roc_auc": 0.6759259259259259,
+  "test_pr_auc": 0.8621953064613023,
+  "test_f1": 0.8571428571428571,
+  "test_acc": 0.75
+}

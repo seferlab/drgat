@@ -1,0 +1,10 @@
+{
+  "drug": "Gefitinib",
+  "augment_ratio": 0.0,
+  "n_train": 96,
+  "n_test": 24,
+  "test_roc_auc": 0.7361111111111112,
+  "test_pr_auc": 0.7242651139709964,
+  "test_f1": 0.6666666666666666,
+  "test_acc": 0.5
+}

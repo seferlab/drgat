@@ -1,0 +1,10 @@
+{
+  "drug": "Paclitaxel",
+  "augment_ratio": 0.0,
+  "n_train": 96,
+  "n_test": 24,
+  "test_roc_auc": 0.962962962962963,
+  "test_pr_auc": 0.9833333333333334,
+  "test_f1": 0.9333333333333333,
+  "test_acc": 0.9166666666666666
+}
