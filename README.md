@@ -6,7 +6,7 @@ It implements the end-to-end pipeline described in the paper:
 3. **Conditional latent DDIM** to augment latent samples for **sensitive/resistant** classes, then decode to expression
 4. **HO-GAT predictor** (high-order neighbor propagation attention) over pathway subgraphs + target-protein distance features
 
-> **Data**: The paper states the train/test configuration follows Sharifi-Noghabi et al. (2019) MOLI and that the data were downloaded from Zenodo.  
+> **Data**: Train/test configuration follows Sharifi-Noghabi et al. (2019) MOLI and that the data were downloaded from Zenodo.  
 > The dataset record is “MOLI: multi-omics late integration …” on Zenodo.
 
 ## Quickstart
