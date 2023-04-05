@@ -1,0 +1,11 @@
+{
+  "val_roc_auc": 0.5948571428571428,
+  "val_pr_auc": 0.6591714566068689,
+  "val_f1": 0.7333333333333333,
+  "val_acc": 0.6,
+  "n_train": 240,
+  "n_val": 60,
+  "augment_ratio": 0.7,
+  "k_pathways": 1,
+  "n_genes": 14
+}

@@ -1,39 +1,40 @@
 # DRGAT: Diffusion-based Graph Attention for Drug Response Prediction
 
-This repository is a **reference implementation** of the pipeline described in the DRGAT paper (diffusion-based augmentation + HO-GAT classifier over pathway subgraphs). It is written to run on **real** gene expression and drug response datasets if you provide the paths, but it also includes a small **toy example** you can run end-to-end.
+It implements the end-to-end pipeline described in the paper:
+1. **Pathway/feature selection** via proximity of drug targets to biological pathways (shortest-path distance, z-scored with degree-matched bootstraps)
+2. **Graph autoencoder** to compress pathway-structured gene-expression into a latent space
+3. **Conditional latent DDIM** to augment latent samples for **sensitive/resistant** classes, then decode to expression
+4. **HO-GAT predictor** (high-order neighbor propagation attention) over pathway subgraphs + target-protein distance features
 
-> ⚠️ Notes
-> - This implementation mirrors the paper's modules: pathway selection (proximity + z-score), graph autoencoder, DDIM-style latent generator (MLP backbone), and HO-GAT (multi-hop) predictor.
-> - External datasets (GDSC/CCLE/CTRP/TCGA/PDX, STRING/KEGG) are **not** included. Data loaders expect CSV files with documented schemas below.
-> - The code uses **PyTorch** and **PyTorch Geometric**.
+> **Data**: The paper states the train/test configuration follows Sharifi-Noghabi et al. (2019) MOLI and that the data were downloaded from Zenodo.  
+> The dataset record is “MOLI: multi-omics late integration …” on Zenodo.
 
-## Quick Start (toy run)
+## Quickstart
 
+### 1) Create environment
 ```bash
+conda create -n drgat python=3.12 -y
+conda activate drgat
 pip install -r requirements.txt
-python run_pipeline.py --mode toy
 ```
 
-This will:
-1) Create a synthetic pathway graph and toy gene expression labels,
-2) Train a graph autoencoder to compress gene expression,
-3) Train a DDIM latent generator (conditional on resistant/sensitive),
-4) Generate augmented samples,
-5) Train an HO-GAT classifier on pathway subgraphs,
-6) Print evaluation metrics.
+### 2) Download data
+```bash
+python run_pipeline_data.py download --zenodo-record 4036592 --data-dir data/raw
+```
 
-## Run on real data
-
-Prepare these inputs (CSV/TSV):
-- `expression.csv`: rows=samples, columns=genes; **index column** named `sample_id`.
-- `labels.csv`: columns: `sample_id,drug,response` where `response` ∈ {0,1} (0: resistant, 1: sensitive).
-- `ppi_edges.csv`: columns: `gene_u,gene_v,score` (STRING-style confidence; filter `score>=0.7` before use or let the loader filter).
-- `pathways.csv`: columns: `pathway_id,gene` (KEGG-derived lists or any curated pathways).
-
-Optional:
-- Patient test sets (PDX/TCGA) in the same `expression.csv` / `labels.csv` format (can be separate files; see CLI).
+### 3) Run the pipeline
 
 ### Example command
+
+```bash
+python run_pipeline.py --drug Docetaxel
+python run_pipeline.py --drug Gemcitabine
+python run_pipeline.py --drug Erlotinib
+python run_pipeline.py --drug Paclitaxel
+python run_pipeline.py --drug Cetuximab
+python run_pipeline.py --drug Cisplatin
+```
 
 ```bash
 python run_pipeline.py   --mode real   --train-expression /path/to/GDSC/expression.csv   --train-labels /path/to/GDSC/labels.csv   --test-expression /path/to/PDX_TCGA/expression.csv   --test-labels /path/to/PDX_TCGA/labels.csv   --ppi /path/to/STRING/ppi_edges.csv   --pathways /path/to/pathways.csv   --drug Cetuximab   --k-pathways-ratio 0.05   --augment-ratio 0.7   --output-dir ./outputs/cetuximab
@@ -84,12 +85,31 @@ MAPK,EGFR
 MAPK,GRB2
 ```
 
-## Reproducibility & Hyperparameters
+## Reproducibility notes
 
-- Default `--augment-ratio 0.7` and `--k-pathways-ratio 0.05` reflect the paper’s best ranges.
-- 5-fold stratified CV for early stopping & selection; patience=10 by default.
-- Random seed fixed unless overridden.
+The paper uses:
+- **80:20** train/validation split with **stratified 5-fold CV** for hyperparameter selection and early stopping (patience 10).  
+- **Augmentation rate**: synthetic samples are ~**70–75%** of real sample count (best-performing range); the Table 1 experiments used **70%**.  
+- **Pathway selection**: optimal was **5%** of pathways.  
+These are encoded as defaults in `configs/*.yaml`.
 
-## License
+## Repository layout
 
-MIT (for this reference code). Please check original dataset licenses before use.
+- `run_pipeline.py` — entry point, with subcommands
+- `src/data/` — dataset download + loaders + splits
+- `src/graphs/` — PPI + KEGG pathway graphs, distance computation, bootstrap z-scores
+- `src/models/` — GraphAE, ConditionalDDIM, HOGAT, Predictor
+- `src/train/` — training loops, early stopping, CV
+- `src/eval/` — AUC/PR-AUC + synthetic-quality metrics (KLD, PD, Log-Cluster, cosine)
+- `configs/` — experiment configs mirroring the paper’s setups
+- `scripts/` — helper scripts
+
+## Disclaimer
+
+This repo is designed as the paper’s described methodology, but exact numeric reproduction may still depend on:
+- the exact preprocessed files used in the referenced Zenodo release,
+- the specific STRING and KEGG versions,
+- random seeds and hardware (esp. for diffusion sampling).
+
+
+

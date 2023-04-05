@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import argparse, os, json, random, numpy as np, torch
 from pathlib import Path
-from drgat.data.datasets import load_expression_labels, make_toy_data
+from drgat.data.datasets import load_expression_labels, read_data
 from drgat.data.pathway_selector import PathwaySelector
 from drgat.utils.ppi import load_ppi_graph
 from drgat.train.train_drgat import train_full_pipeline
@@ -9,7 +9,7 @@ from drgat.eval.metrics import set_seed
 
 def parse_args():
     p = argparse.ArgumentParser(description="DRGAT end-to-end pipeline")
-    p.add_argument("--mode", choices=["toy","real"], default="toy")
+    p.add_argument("--mode", choices=["toy","real"], default="real")
     p.add_argument("--train-expression", type=str, default=None)
     p.add_argument("--train-labels", type=str, default=None)
     p.add_argument("--test-expression", type=str, default=None)
@@ -30,8 +30,9 @@ def main():
     set_seed(args.seed)
     os.makedirs(args.output_dir, exist_ok=True)
 
-    if args.mode == "toy":
-        expr_df, labels_df, ppi_df, pathways_df, target_genes = make_toy_data()
+    if args.mode == "real":
+        #expr_df, labels_df, ppi_df, pathways_df, target_genes = make_toy_data()
+        expr_df, labels_df, ppi_df, pathways_df, target_genes = read_data(args.drug)
         drug = labels_df["drug"].unique()[0]
     else:
         assert args.train_expression and args.train_labels and args.ppi and args.pathways, "Missing required real-data paths."
@@ -45,14 +46,14 @@ def main():
 
     # Build PPI graph
     G = load_ppi_graph(ppi_df, confidence_threshold=args.confidence_threshold, take_lcc=True)
-
+    
     # Pathway selection (z-score proximity to drug targets)
     selector = PathwaySelector(G, pathways_df)
     selected_pathways, gene_set, distances = selector.select_for_drug(
         drug=drug,
         target_genes=target_genes,
         k_ratio=args.k_pathways_ratio,
-        n_boot=200
+        n_boot=5
     )
 
     # Train pipeline
