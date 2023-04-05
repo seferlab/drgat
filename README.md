@@ -85,7 +85,7 @@ MAPK,EGFR
 MAPK,GRB2
 ```
 
-## Reproducibility notes
+## Notes
 
 The paper uses:
 - **80:20** train/validation split with **stratified 5-fold CV** for hyperparameter selection and early stopping (patience 10).  

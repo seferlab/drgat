@@ -1,11 +1,11 @@
 {
-  "val_roc_auc": 0.5948571428571428,
-  "val_pr_auc": 0.6591714566068689,
-  "val_f1": 0.7333333333333333,
-  "val_acc": 0.6,
-  "n_train": 240,
-  "n_val": 60,
+  "val_roc_auc": 0.8444444444444444,
+  "val_pr_auc": 0.8526315789473684,
+  "val_f1": 0.7058823529411765,
+  "val_acc": 0.7916666666666666,
+  "n_train": 96,
+  "n_val": 24,
   "augment_ratio": 0.7,
-  "k_pathways": 1,
-  "n_genes": 14
+  "k_pathways": 2,
+  "n_genes": 34
 }
