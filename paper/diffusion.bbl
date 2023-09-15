@@ -1,0 +1,247 @@
+\begin{thebibliography}{23}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Amani Al-Mekhlafi and Klawonn(2022)]{1}
+Amani Al-Mekhlafi, T.~B. and Klawonn, F.
+\newblock Sample size and performance estimation for biomarker combinations
+  based on pilot studies with small sample sizes.
+\newblock \emph{Communications in Statistics - Theory and Methods}, 51\penalty0
+  (16):\penalty0 5534--5548, 2022.
+\newblock \doi{10.1080/03610926.2020.1843053}.
+\newblock URL \url{https://doi.org/10.1080/03610926.2020.1843053}.
+
+\bibitem[Arik and Pfister(2020)]{2}
+Arik, S.~O. and Pfister, T.
+\newblock Tabnet: Attentive interpretable tabular learning, 2020.
+
+\bibitem[Battaglia et~al.(2018)Battaglia, Hamrick, Bapst, Sanchez, Zambaldi,
+  Malinowski, Tacchetti, Raposo, Santoro, Faulkner, Gulcehre, Song, Ballard,
+  Gilmer, Dahl, Vaswani, Allen, Nash, Langston, Dyer, Heess, Wierstra, Kohli,
+  Botvinick, Vinyals, Li, and Pascanu]{3}
+Battaglia, P., Hamrick, J. B.~C., Bapst, V., Sanchez, A., Zambaldi, V.,
+  Malinowski, M., Tacchetti, A., Raposo, D., Santoro, A., Faulkner, R.,
+  Gulcehre, C., Song, F., Ballard, A., Gilmer, J., Dahl, G.~E., Vaswani, A.,
+  Allen, K., Nash, C., Langston, V.~J., Dyer, C., Heess, N., Wierstra, D.,
+  Kohli, P., Botvinick, M., Vinyals, O., Li, Y., and Pascanu, R.
+\newblock Relational inductive biases, deep learning, and graph networks.
+\newblock \emph{arXiv}, 2018.
+\newblock URL \url{https://arxiv.org/pdf/1806.01261.pdf}.
+
+\bibitem[Chadebec and Allassonni{\`e}re(2021)]{4}
+Chadebec, C. and Allassonni{\`e}re, S.
+\newblock Data augmentation with variational autoencoders and manifold
+  sampling.
+\newblock In Engelhardt, S., Oksuz, I., Zhu, D., Yuan, Y., Mukhopadhyay, A.,
+  Heller, N., Huang, S.~X., Nguyen, H., Sznitman, R., and Xue, Y., editors,
+  \emph{Deep Generative Models, and Data Augmentation, Labelling, and
+  Imperfections}, pages 184--192, Cham, 2021. Springer International
+  Publishing.
+\newblock ISBN 978-3-030-88210-5.
+
+\bibitem[Chaudhari et~al.(2020)Chaudhari, Agrawal, and Kotecha]{5}
+Chaudhari, P., Agrawal, H., and Kotecha, K.
+\newblock Data augmentation using mg-gan for improved cancer classification on
+  gene expression data.
+\newblock \emph{Soft Computing}, 24\penalty0 (15):\penalty0 11381--11391, 2020.
+\newblock \doi{10.1007/s00500-019-04602-2}.
+\newblock URL \url{https://doi.org/10.1007/s00500-019-04602-2}.
+
+\bibitem[Chiu et~al.(2019)Chiu, Chen, Zhang, Zhang, Gorthi, Wang, Huang, and
+  Chen]{6}
+Chiu, Y.-C., Chen, H.-I.~H., Zhang, T., Zhang, S., Gorthi, A., Wang, L.-J.,
+  Huang, Y., and Chen, Y.
+\newblock Predicting drug response of tumors from integrated genomic profiles
+  by deep neural networks.
+\newblock \emph{BMC Medical Genomics}, 12\penalty0 (1):\penalty0 18, 2019.
+\newblock \doi{10.1186/s12920-018-0460-9}.
+\newblock URL \url{https://doi.org/10.1186/s12920-018-0460-9}.
+
+\bibitem[Devlin et~al.(2019)Devlin, Chang, Lee, and Toutanova]{7}
+Devlin, J., Chang, M.-W., Lee, K., and Toutanova, K.
+\newblock {BERT}: Pre-training of deep bidirectional transformers for language
+  understanding.
+\newblock In Burstein, J., Doran, C., and Solorio, T., editors,
+  \emph{Proceedings of the 2019 Conference of the North {A}merican Chapter of
+  the Association for Computational Linguistics: Human Language Technologies,
+  Volume 1 (Long and Short Papers)}, pages 4171--4186, Minneapolis, Minnesota,
+  June 2019. Association for Computational Linguistics.
+\newblock \doi{10.18653/v1/N19-1423}.
+\newblock URL \url{https://aclanthology.org/N19-1423}.
+
+\bibitem[Ding et~al.(2018)Ding, Chen, Cooper, Young, and Lu]{8}
+Ding, M.~Q., Chen, L., Cooper, G.~F., Young, J.~D., and Lu, X.
+\newblock {Precision Oncology beyond Targeted Therapy: Combining Omics Data
+  with Machine Learning Matches the Majority of Cancer Cells to Effective
+  Therapeutics}.
+\newblock \emph{Molecular Cancer Research}, 16\penalty0 (2):\penalty0 269--278,
+  02 2018.
+\newblock ISSN 1541-7786.
+\newblock \doi{10.1158/1541-7786.MCR-17-0378}.
+\newblock URL \url{https://doi.org/10.1158/1541-7786.MCR-17-0378}.
+
+\bibitem[Fern{\'a}ndez-Torras et~al.(2019)Fern{\'a}ndez-Torras, Duran-Frigola,
+  and Aloy]{9}
+Fern{\'a}ndez-Torras, A., Duran-Frigola, M., and Aloy, P.
+\newblock Encircling the regions of the pharmacogenomic landscape that
+  determine drug response.
+\newblock \emph{Genome Medicine}, 11\penalty0 (1):\penalty0 17, 2019.
+\newblock \doi{10.1186/s13073-019-0626-x}.
+\newblock URL \url{https://doi.org/10.1186/s13073-019-0626-x}.
+
+\bibitem[Gao et~al.(2015)Gao, Korn, Ferretti, Monahan, Wang, Singh, Zhang,
+  Schnell, Yang, Zhang, Balbin, Barbe, Cai, Casey, Chatterjee, Chiang, Chuai,
+  Cogan, Collins, Dammassa, Ebel, Embry, Green, Kauffmann, Kowal, Leary, Lehar,
+  Liang, Loo, Lorenzana, Robert~McDonald, McLaughlin, Merkin, Meyer, Naylor,
+  Patawaran, Reddy, R{\"o}elli, Ruddy, Salangsang, Santacroce, Singh, Tang,
+  Tinetto, Tobler, Velazquez, Venkatesan, Von~Arx, Wang, Wang, Wiesmann, Wyss,
+  Xu, Bitter, Atadja, Lees, Hofmann, Li, Keen, Cozens, Jensen, Pryer, Williams,
+  and Sellers]{10}
+Gao, H., Korn, J.~M., Ferretti, S., Monahan, J.~E., Wang, Y., Singh, M., Zhang,
+  C., Schnell, C., Yang, G., Zhang, Y., Balbin, O.~A., Barbe, S., Cai, H.,
+  Casey, F., Chatterjee, S., Chiang, D.~Y., Chuai, S., Cogan, S.~M., Collins,
+  S.~D., Dammassa, E., Ebel, N., Embry, M., Green, J., Kauffmann, A., Kowal,
+  C., Leary, R.~J., Lehar, J., Liang, Y., Loo, A., Lorenzana, E.,
+  Robert~McDonald, E., McLaughlin, M.~E., Merkin, J., Meyer, R., Naylor, T.~L.,
+  Patawaran, M., Reddy, A., R{\"o}elli, C., Ruddy, D.~A., Salangsang, F.,
+  Santacroce, F., Singh, A.~P., Tang, Y., Tinetto, W., Tobler, S., Velazquez,
+  R., Venkatesan, K., Von~Arx, F., Wang, H.~Q., Wang, Z., Wiesmann, M., Wyss,
+  D., Xu, F., Bitter, H., Atadja, P., Lees, E., Hofmann, F., Li, E., Keen, N.,
+  Cozens, R., Jensen, M.~R., Pryer, N.~K., Williams, J.~A., and Sellers, W.~R.
+\newblock High-throughput screening using patient-derived tumor xenografts to
+  predict clinical trial drug response.
+\newblock \emph{Nature Medicine}, 21\penalty0 (11):\penalty0 1318--1325, 2015.
+\newblock \doi{10.1038/nm.3954}.
+\newblock URL \url{https://doi.org/10.1038/nm.3954}.
+
+\bibitem[Guney et~al.(2016)Guney, Menche, Vidal, and Bar{\'a}basi]{14}
+Guney, E., Menche, J., Vidal, M., and Bar{\'a}basi, A.-L.
+\newblock Network-based in silico drug efficacy screening.
+\newblock \emph{Nature Communications}, 7\penalty0 (1):\penalty0 10331, 2016.
+\newblock \doi{10.1038/ncomms10331}.
+\newblock URL \url{https://doi.org/10.1038/ncomms10331}.
+
+\bibitem[Ho et~al.(2020)Ho, Jain, and Abbeel]{17}
+Ho, J., Jain, A., and Abbeel, P.
+\newblock Denoising diffusion probabilistic models.
+\newblock \emph{arXiv preprint arxiv:2006.11239}, 2020.
+
+\bibitem[Iorio et~al.(2016)Iorio, Knijnenburg, Vis, Bignell, Menden, Schubert,
+  Aben, Gon{\c c}alves, Barthorpe, Lightfoot, Cokelaer, Greninger, van Dyk,
+  Chang, de~Silva, Heyn, Deng, Egan, Liu, Mironenko, Mitropoulos, Richardson,
+  Wang, Zhang, Moran, Sayols, Soleimani, Tamborero, Lopez-Bigas,
+  Ross-Macdonald, Esteller, Gray, Haber, Stratton, Benes, Wessels,
+  Saez-Rodriguez, McDermott, and Garnett]{18}
+Iorio, F., Knijnenburg, T.~A., Vis, D.~J., Bignell, G.~R., Menden, M.~P.,
+  Schubert, M., Aben, N., Gon{\c c}alves, E., Barthorpe, S., Lightfoot, H.,
+  Cokelaer, T., Greninger, P., van Dyk, E., Chang, H., de~Silva, H., Heyn, H.,
+  Deng, X., Egan, R.~K., Liu, Q., Mironenko, T., Mitropoulos, X., Richardson,
+  L., Wang, J., Zhang, T., Moran, S., Sayols, S., Soleimani, M., Tamborero, D.,
+  Lopez-Bigas, N., Ross-Macdonald, P., Esteller, M., Gray, N.~S., Haber, D.~A.,
+  Stratton, M.~R., Benes, C.~H., Wessels, L. F.~A., Saez-Rodriguez, J.,
+  McDermott, U., and Garnett, M.~J.
+\newblock A landscape of pharmacogenomic interactions in cancer.
+\newblock \emph{Cell}, 166\penalty0 (3):\penalty0 740--754, 2023/11/01 2016.
+\newblock \doi{10.1016/j.cell.2016.06.017}.
+\newblock URL \url{https://doi.org/10.1016/j.cell.2016.06.017}.
+
+\bibitem[Karras et~al.(2020)Karras, Aittala, Hellsten, Laine, Lehtinen, and
+  Aila]{19}
+Karras, T., Aittala, M., Hellsten, J., Laine, S., Lehtinen, J., and Aila, T.
+\newblock Training generative adversarial networks with limited data.
+\newblock In \emph{Proceedings of the 34th International Conference on Neural
+  Information Processing Systems}, NIPS'20, Red Hook, NY, USA, 2020. Curran
+  Associates Inc.
+\newblock ISBN 9781713829546.
+
+\bibitem[Kim et~al.(2021)Kim, Bae, Piao, and Jo]{20}
+Kim, S., Bae, S., Piao, Y., and Jo, K.
+\newblock Graph convolutional network for drug response prediction using gene
+  expression data.
+\newblock \emph{Mathematics}, 9\penalty0 (7), 2021.
+\newblock ISSN 2227-7390.
+\newblock \doi{10.3390/math9070772}.
+\newblock URL \url{https://www.mdpi.com/2227-7390/9/7/772}.
+
+\bibitem[Kurzlechner et~al.(2023)Kurzlechner, Kishnani, Chowdhury, Atkins,
+  Moya-Mendez, Parker, Rosamilia, Tadros, Pace, Patel, Chahal, and
+  Landstrom]{21}
+Kurzlechner, L.~M., Kishnani, S., Chowdhury, S., Atkins, S.~L., Moya-Mendez,
+  M.~E., Parker, L.~E., Rosamilia, M.~B., Tadros, H.~J., Pace, L.~A., Patel,
+  V., Chahal, C. A.~A., and Landstrom, A.~P.
+\newblock <i>discovari</i>: A web-based precision medicine tool for predicting
+  variant pathogenicity in cardiomyopathy- and channelopathy-associated genes.
+\newblock \emph{Circulation: Genomic and Precision Medicine}, 16\penalty0
+  (4):\penalty0 317--327, 2023.
+\newblock \doi{10.1161/CIRCGEN.122.003911}.
+\newblock URL
+  \url{https://www.ahajournals.org/doi/abs/10.1161/CIRCGEN.122.003911}.
+
+\bibitem[Park et~al.(2021)Park, Soh, and Lee]{25}
+Park, S., Soh, J., and Lee, H.
+\newblock Super.felt: supervised feature extraction learning using triplet loss
+  for drug response prediction with multi-omics data.
+\newblock \emph{BMC Bioinformatics}, 22\penalty0 (1):\penalty0 269, 2021.
+\newblock \doi{10.1186/s12859-021-04146-z}.
+\newblock URL \url{https://doi.org/10.1186/s12859-021-04146-z}.
+
+\bibitem[Ronneberger et~al.(2015)Ronneberger, Fischer, and Brox]{unet}
+Ronneberger, O., Fischer, P., and Brox, T.
+\newblock U-net: Convolutional networks for biomedical image segmentation.
+\newblock In Navab, N., Hornegger, J., Wells, W.~M., and Frangi, A.~F.,
+  editors, \emph{Medical Image Computing and Computer-Assisted Intervention --
+  MICCAI 2015}, pages 234--241, Cham, 2015. Springer International Publishing.
+\newblock ISBN 978-3-319-24574-4.
+
+\bibitem[Ryu et~al.(2018)Ryu, Lim, Hong, and Kim]{28}
+Ryu, S., Lim, J., Hong, S.~H., and Kim, W.~Y.
+\newblock Deeply learning molecular structure-property relationships using
+  attention- and gate-augmented graph convolutional network, 2018.
+
+\bibitem[Sharifi-Noghabi et~al.(2019)Sharifi-Noghabi, Zolotareva, Collins, and
+  Ester]{29}
+Sharifi-Noghabi, H., Zolotareva, O., Collins, C.~C., and Ester, M.
+\newblock {MOLI: multi-omics late integration with deep neural networks for
+  drug response prediction}.
+\newblock \emph{Bioinformatics}, 35\penalty0 (14):\penalty0 i501--i509, 07
+  2019.
+\newblock ISSN 1367-4803.
+\newblock \doi{10.1093/bioinformatics/btz318}.
+\newblock URL \url{https://doi.org/10.1093/bioinformatics/btz318}.
+
+\bibitem[Sharma et~al.(2023)Sharma, Lysenko, Boroevich, and Tsunoda]{30}
+Sharma, A., Lysenko, A., Boroevich, K.~A., and Tsunoda, T.
+\newblock Deepinsight-3d architecture for anti-cancer drug response prediction
+  with deep-learning on multi-omics.
+\newblock \emph{Scientific Reports}, 13\penalty0 (1):\penalty0 2483, 2023.
+\newblock \doi{10.1038/s41598-023-29644-3}.
+\newblock URL \url{https://doi.org/10.1038/s41598-023-29644-3}.
+
+\bibitem[Szklarczyk et~al.(2018)Szklarczyk, Gable, Lyon, Junge, Wyder,
+  Huerta-Cepas, Simonovic, Doncheva, Morris, Bork, Jensen, and Mering]{34}
+Szklarczyk, D., Gable, A.~L., Lyon, D., Junge, A., Wyder, S., Huerta-Cepas, J.,
+  Simonovic, M., Doncheva, N.~T., Morris, J.~H., Bork, P., Jensen, L.~J., and
+  Mering, C.
+\newblock {STRING v11: protein–protein association networks with increased
+  coverage, supporting functional discovery in genome-wide experimental
+  datasets}.
+\newblock \emph{Nucleic Acids Research}, 47\penalty0 (D1):\penalty0 D607--D613,
+  11 2018.
+\newblock ISSN 0305-1048.
+\newblock \doi{10.1093/nar/gky1131}.
+\newblock URL \url{https://doi.org/10.1093/nar/gky1131}.
+
+\bibitem[Xu et~al.(2019)Xu, Gu, Wang, Wang, and Qin]{36}
+Xu, X., Gu, H., Wang, Y., Wang, J., and Qin, P.
+\newblock Autoencoder based feature selection method for classification of
+  anticancer drug response.
+\newblock \emph{Frontiers in Genetics}, 10, 2019.
+\newblock ISSN 1664-8021.
+\newblock \doi{10.3389/fgene.2019.00233}.
+\newblock URL
+  \url{https://www.frontiersin.org/articles/10.3389/fgene.2019.00233}.
+
+\end{thebibliography}

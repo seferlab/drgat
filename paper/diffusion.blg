@@ -1,0 +1,83 @@
+This is BibTeX, Version 0.99e (TeX Live 2026)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: diffusion.aux
+White space in argument---line 5 of file diffusion.aux
+ : \citation{3,
+ :              4}
+I'm skipping whatever remains of this command
+White space in argument---line 6 of file diffusion.aux
+ : \citation{6,
+ :              8, 22, 25}
+I'm skipping whatever remains of this command
+White space in argument---line 7 of file diffusion.aux
+ : \citation{1,
+ :              23, 24}
+I'm skipping whatever remains of this command
+White space in argument---line 12 of file diffusion.aux
+ : \citation{9,
+ :              14}
+I'm skipping whatever remains of this command
+White space in argument---line 15 of file diffusion.aux
+ : \citation{5,
+ :              35}
+I'm skipping whatever remains of this command
+White space in argument---line 16 of file diffusion.aux
+ : \citation{17,
+ :               32}
+I'm skipping whatever remains of this command
+White space in argument---line 17 of file diffusion.aux
+ : \citation{3,
+ :              15}
+I'm skipping whatever remains of this command
+White space in argument---line 19 of file diffusion.aux
+ : \citation{8,
+ :              11, 13, 18}
+I'm skipping whatever remains of this command
+White space in argument---line 44 of file diffusion.aux
+ : \citation{17,
+ :               33}
+I'm skipping whatever remains of this command
+The style file: plainnat-revised.bst
+Database file #1: drgat.bib
+You've used 23 entries,
+            2773 wiz_defined-function locations,
+            777 strings with 14033 characters,
+and the built_in function-call counts, 19842 in all, are:
+= -- 1585
+> -- 2133
+< -- 6
++ -- 709
+- -- 686
+* -- 2031
+:= -- 3292
+add.period$ -- 112
+call.type$ -- 23
+change.case$ -- 292
+chr.to.int$ -- 23
+cite$ -- 46
+duplicate$ -- 507
+empty$ -- 916
+format.name$ -- 715
+if$ -- 3933
+int.to.chr$ -- 1
+int.to.str$ -- 1
+missing$ -- 21
+newline$ -- 162
+num.names$ -- 98
+pop$ -- 528
+preamble$ -- 1
+purify$ -- 269
+quote$ -- 0
+skip$ -- 540
+stack$ -- 0
+substring$ -- 414
+swap$ -- 57
+text.length$ -- 3
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 253
+warning$ -- 0
+while$ -- 97
+width$ -- 0
+write$ -- 388
+(There were 9 error messages)
