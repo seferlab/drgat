@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.3.6)  15 APR 2026 16:22
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.3.6)  15 APR 2026 20:53
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -476,256 +476,53 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 Title too long for running head. Please supply
 a shorter form with \titlerunning prior to \maketitle
-
-LaTeX Warning: Citation ` 4' on page 1 undefined on input line 101.
-
-
-LaTeX Warning: Citation ` 8' on page 1 undefined on input line 104.
-
-
-LaTeX Warning: Citation ` 22' on page 1 undefined on input line 104.
-
-
-LaTeX Warning: Citation ` 25' on page 1 undefined on input line 104.
-
-
-Overfull \hbox (507.22339pt too wide) in paragraph at lines 89--105
-\T1/cmr/m/n/10 ca-lat-ing avail-abil-ity of in-di-vid-ual med-i-cal data [[]].
- []
-
-
-Overfull \hbox (958.68259pt too wide) in paragraph at lines 89--105
-\T1/cmr/m/n/10 dic-tions, with many pre-vi-ous stud-ies [[],\T1/cmr/bx/n/10 ?\T
-1/cmr/m/n/10 ]
- []
-
-
-Overfull \hbox (49.50183pt too wide) in paragraph at lines 89--105
-\T1/cmr/m/n/10 tions [[],\T1/cmr/bx/n/10 ?\T1/cmr/m/n/10 ,\T1/cmr/bx/n/10 ?\T1/
-cmr/m/n/10 ,\T1/cmr/bx/n/10 ?\T1/cmr/m/n/10 ]. 
- []
-
-
-LaTeX Warning: Citation ` 23' on page 1 undefined on input line 111.
-
-
-LaTeX Warning: Citation ` 24' on page 1 undefined on input line 111.
-
-
-Overfull \hbox (87.21484pt too wide) in paragraph at lines 106--117
-\T1/cmr/m/n/10 datasets and re-duce the gen-er-al-ity of pre-dic-tion mod-els [
-[],\T1/cmr/bx/n/10 ?\T1/cmr/m/n/10 ,\T1/cmr/bx/n/10 ?\T1/cmr/m/n/10 ].
- []
-
 [1
 
 {/usr/local/texlive/2026/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/usr/loc
 al/texlive/2026/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}]
-
-LaTeX Warning: Citation ` 14' on page 2 undefined on input line 122.
-
-
-LaTeX Warning: Citation ` 35' on page 2 undefined on input line 131.
-
-
-LaTeX Warning: Citation ` 32' on page 2 undefined on input line 136.
-
-
-LaTeX Warning: Citation ` 15' on page 2 undefined on input line 136.
-
-
-Overfull \hbox (11.10843pt too wide) in paragraph at lines 118--145
-\T1/cmr/m/n/10 ways [[],\T1/cmr/bx/n/10 ?\T1/cmr/m/n/10 ].
- []
-
-
-Overfull \hbox (66.46991pt too wide) in paragraph at lines 118--145
-\T1/cmr/m/n/10 gen-er-a-tive mod-els, such as vari-a-tional au-toen-coders (VAE
-s) [[]]
- []
-
-
-Overfull \hbox (162.26596pt too wide) in paragraph at lines 118--145
-\T1/cmr/m/n/10 and gen-er-a-tive ad-ver-sar-ial net-works (GANs) [[]],
- []
-
-
-Overfull \hbox (6.16519pt too wide) in paragraph at lines 118--145
-\T1/cmr/m/n/10 data [[],\T1/cmr/bx/n/10 ?\T1/cmr/m/n/10 ]. How-ever, these
- []
-
-
-Overfull \hbox (73.39877pt too wide) in paragraph at lines 118--145
-\T1/cmr/m/n/10 led to the emer-gence of in-no-va-tive mod-els such as DDPM [[],
-\T1/cmr/bx/n/10 ?\T1/cmr/m/n/10 ],
- []
-
-
-Overfull \hbox (927.1625pt too wide) in paragraph at lines 118--145
-\T1/cmr/m/n/10 bias for the pre-dic-tive model [[],\T1/cmr/bx/n/10 ?\T1/cmr/m/n
-/10 ].
- []
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Underfull \vbox (badness 5105) has occurred while \output is active []
 
  [2]
-
-LaTeX Warning: Citation ` 11' on page 3 undefined on input line 172.
-
-
-LaTeX Warning: Citation ` 13' on page 3 undefined on input line 172.
-
-
-LaTeX Warning: Citation ` 18' on page 3 undefined on input line 172.
-
-
-Overfull \hbox (43.55884pt too wide) in paragraph at lines 172--173
-\T1/cmr/m/n/10 tion (MOLI) [[]],
- []
-
-
-Overfull \hbox (11.98322pt too wide) in paragraph at lines 172--173
-\T1/cmr/m/n/10 tion learn-ing us-ing triplet loss (Su-per.FELT) [[]],
- []
-
-
-Overfull \hbox (5.54034pt too wide) in paragraph at lines 172--173
-\T1/cmr/m/n/10 DeepInsight-3D [[]],
- []
-
-
-Overfull \hbox (0.48602pt too wide) in paragraph at lines 172--173
-\T1/cmr/m/n/10 con-verts struc-tured data into im-ages us-ing con-vo-lu-tional 
-neu-ral net-works (CNNs)
- []
-
 [3]
-Overfull \hbox (41.44714pt too wide) in paragraph at lines 184--187
-\T1/cmr/m/n/10 A De-nois-ing Dif-fu-sion Prob-a-bilis-tic Model (DDPM) [[]]
- []
-
-
-Overfull \hbox (19.20432pt too wide) in paragraph at lines 200--202
+Overfull \hbox (27.81528pt too wide) in paragraph at lines 147--148
 []\T1/cmr/m/n/10 The train-ing strat-egy of DDPM com-mences with the pa-ram-e-t
-er-i-za-tion $\OML/cmm/m/it/10 p[]\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 x[]\OMS/cms
-y/m/n/10 j\OML/cmm/m/it/10 x[]\OT1/cmr/m/n/10 )$
+er-i-za-tion $\OML/cmm/m/it/10 p[] []$
  []
 
 [4]
-
-LaTeX Warning: Reference `fig:1' on page 5 undefined on input line 221.
-
-
-LaTeX Warning: Reference `fig:1' on page 5 undefined on input line 225.
-
-
-Overfull \hbox (130.17657pt too wide) in paragraph at lines 225--227
-\T1/cmr/m/n/10 seen in Fig-ure []A, by us-ing the method pro-posed in [[]].
+<framework.jpg, id=34, 1264.725pt x 793.96625pt>
+File: framework.jpg Graphic file (type jpg)
+<use framework.jpg>
+Package pdftex.def Info: framework.jpg  used on input line 182.
+(pdftex.def)             Requested size: 347.12354pt x 217.91132pt.
+ [5]
+Overfull \hbox (9.7893pt too wide) in paragraph at lines 213--213
+[]    \T1/cmtt/m/n/10 $\theta \leftarrow$ Weights for the generative (diffusion
+) model[] 
  []
 
 
-LaTeX Warning: Reference `fig:1' on page 5 undefined on input line 247.
-
-
-LaTeX Warning: Reference `alg:1' on page 5 undefined on input line 247.
-
-[5]
-Overfull \hbox (68.99707pt too wide) in paragraph at lines 264--272
-\T1/cmr/m/n/10 based model is im-ple-mented as U-Net [[]]
- []
-
-[6]
-
-LaTeX Warning: Citation ` 33' on page 7 undefined on input line 297.
-
-
-LaTeX Warning: Reference `fig:1' on page 7 undefined on input line 311.
-
-
-Overfull \hbox (74.57904pt too wide) in paragraph at lines 319--327
-\T1/cmr/m/n/10 the pro-cess of to-ken em-bed-ding in BERT [[]].
+Overfull \hbox (639.6355pt too wide) in paragraph at lines 213--213
+[]        \T1/cmtt/m/n/10 Take gradient descent step at $\nabla_{\psi}\left\|x-
+D e_{\phi}\left(E n_{\psi}(x, G)\right)\right\|^{2}, \nabla_{\phi}\left\|x-D e_
+{\phi}\left(E n_{\psi}(x, G)\right)\right\|^{2}$[] 
  []
 
 
-Overfull \hbox (42.83679pt too wide) in paragraph at lines 319--327
-\T1/cmr/m/n/10 em-ploys the at-ten-tion mech-a-nism pro-posed in [[]]
+Overfull \hbox (560.90472pt too wide) in paragraph at lines 213--213
+[]        \T1/cmtt/m/n/10 Take gradient descent step at $\nabla_{\theta}\left\|
+\epsilon-\epsilon_{\theta}\left(\sqrt{\bar{a}_{t}} r_{0}+\sqrt{1-\bar{a}_{t}} \
+epsilon, t, c\right)\right\|^{2}$[] 
  []
 
-[7]
-Overfull \hbox (87.18707pt too wide) in paragraph at lines 354--368
-\T1/cmr/m/n/10 cur-rent sub-sec-tion and the model pro-posed by Ryu et al [[]].
-
+[6 <./framework.jpg>]
+Overfull \hbox (440.1842pt too wide) in paragraph at lines 213--213
+[]        \T1/cmtt/m/n/10 $r_{t-1}=\frac{1}{\sqrt{a_{t}}}\left(r_{t}-\frac{1-a_
+{t}}{\sqrt{1-\bar{a}_{t}}} \epsilon_{\theta}\left(r_{t}, t, c\right)\right)+\si
+gma_{t} z$[] 
  []
 
-[8]
-Overfull \hbox (261.06128pt too wide) in paragraph at lines 391--398
-\T1/cmr/m/n/10 We used the same dataset setup as that used in a pre-vi-ous stud
-y [[]];
- []
-
-
-Overfull \hbox (1416.47357pt too wide) in paragraph at lines 391--398
-\T1/cmr/m/n/10 study [[]]
- []
-
-
-Overfull \hbox (47.16797pt too wide) in paragraph at lines 391--398
-\T1/cmr/m/n/10 cer Genome At-las (TCGA) re-source [[]]
- []
-
-
-Overfull \hbox (2326.23642pt too wide) in paragraph at lines 391--398
-\T1/cmr/m/n/10 and Patient-Derived Xenograft (PDX) en-cy-clo-pe-dia [[]].
- []
-
-
-Overfull \hbox (222.98724pt too wide) in paragraph at lines 391--398
-\T1/cmr/m/n/10 The data were down-loaded from the Zen-odo repos-i-tory [[]]. 
- []
-
-[9]
-Overfull \hbox (568.7778pt too wide) in paragraph at lines 399--400
-\T1/cmr/m/n/10 the Search Tool for the Re-trieval of In-ter-act-ing Genes/Prote
-ins (STRING) [[]]
- []
-
-
-LaTeX Warning: Reference `sec:hyper' on page 10 undefined on input line 407.
-
-
-LaTeX Warning: Reference `sec:syn' on page 10 undefined on input line 409.
-
-
-Overfull \hbox (14.42592pt too wide) in paragraph at lines 405--412
- \T1/cmr/bx/n/10 Ex-per-i-men-tal Set-ting[] \T1/cmr/m/n/10 To train and val-i-
-date the model, the GDSC dataset (train),
- []
-
-
-Overfull \hbox (638.69128pt too wide) in paragraph at lines 405--412
-\T1/cmr/m/n/10 tion met-rics that are em-ployed in pre-vi-ous stud-ies [[],[],[
-]].
- []
-
-
-Overfull \hbox (95.50449pt too wide) in paragraph at lines 415--419
-\T1/cmr/m/n/10 posed by Geele-her et al in [[]]
- []
-
-
-Overfull \hbox (66.80316pt too wide) in paragraph at lines 415--419
-\T1/cmr/m/n/10 ducted with other meth-ods men-tioned in a pre-vi-ous study [[]]
-,
- []
-
-
-Overfull \hbox (74.7179pt too wide) in paragraph at lines 415--419
-\T1/cmr/m/n/10 chine (SVM). Fi-nally, we com-pared the pro-posed frame-work wit
-h Tab-Net [[]],
- []
-
-[10] [11] (./diffusion.bbl
+[7] [8] [9] [10] [11] [12] [13] [14] (./diffusion.bbl
 Overfull \hbox (712.24854pt too wide) in paragraph at lines 25--33
 []
  []
@@ -758,7 +555,7 @@ Underfull \hbox (badness 2020) in paragraph at lines 55--62
 12920-018-0460-9.  URL
  []
 
-[12]
+
 Underfull \hbox (badness 1694) in paragraph at lines 64--74
 []\T1/cmr/m/n/9 Devlin, J., Chang, M.-W.,
  []
@@ -768,7 +565,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 76--85
 []\T1/cmr/m/n/9 Ding, M. Q., Chen, L.,
  []
 
-
+[15]
 Underfull \hbox (badness 10000) in paragraph at lines 88--94
 []
  []
@@ -783,12 +580,12 @@ Overfull \hbox (1264.71558pt too wide) in paragraph at lines 138--150
 []
  []
 
-[13]
+
 Underfull \hbox (badness 7667) in paragraph at lines 153--159
 []\T1/cmr/m/n/9 Karras, T.,
  []
 
-
+[16]
 Overfull \hbox (260.60223pt too wide) in paragraph at lines 172--182
 []
  []
@@ -874,24 +671,20 @@ Underfull \hbox (badness 1946) in paragraph at lines 225--236
 URL
  []
 
-[14]) [15] (./diffusion.aux)
+) [17] (./diffusion.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
  ***********
-
-
-LaTeX Warning: There were undefined references.
-
  ) 
 Here is how much of TeX's memory you used:
- 6126 strings out of 467525
- 95907 string characters out of 5418983
- 517923 words of memory out of 5000000
+ 6127 strings out of 467525
+ 96169 string characters out of 5418983
+ 517433 words of memory out of 5000000
  34922 multiletter control sequences out of 15000+600000
- 645821 words of font info for 87 fonts, out of 8000000 for 9000
+ 646134 words of font info for 88 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 67i,11n,77p,1218b,334s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 67i,11n,77p,2210b,404s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 ></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb>
 </usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><
@@ -912,11 +705,12 @@ ve/2026/texmf-dist/fonts/type1/public/cm-super/sfbx1000.pfb></usr/local/texlive
 texmf-dist/fonts/type1/public/cm-super/sfrm0900.pfb></usr/local/texlive/2026/te
 xmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb></usr/local/texlive/2026/texm
 f-dist/fonts/type1/public/cm-super/sfti0900.pfb></usr/local/texlive/2026/texmf-
-dist/fonts/type1/public/cm-super/sftt0900.pfb>
-Output written on diffusion.pdf (15 pages, 388585 bytes).
+dist/fonts/type1/public/cm-super/sftt0900.pfb></usr/local/texlive/2026/texmf-di
+st/fonts/type1/public/cm-super/sftt1000.pfb>
+Output written on diffusion.pdf (17 pages, 555725 bytes).
 PDF statistics:
- 159 PDF objects out of 1000 (max. 8388607)
- 99 compressed objects within 1 object stream
+ 172 PDF objects out of 1000 (max. 8388607)
+ 106 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 6 words of extra memory for PDF output out of 10000 (max. 10000000)
 

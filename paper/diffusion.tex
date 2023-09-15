@@ -68,13 +68,29 @@
 %
 \begin{abstract}
 
-Accurately predicting drug responses based on a patient's genomic
-profile is critical for advancing precision medicine. The rise of deep
-learning algorithms leveraging large-scale omics datasets has been a key driver of research in this area. However, biological datasets,
-which are typically high-dimensional but have small sample sizes,
-present challenges such as overfitting and poor generalization in
-predictive models. Complicating matters further, gene expression data must capture complex inter-gene relationships, exacerbating these issues. To tackle these challenges, we introduce a drug response
-prediction framework, called \drdiff, which combines a denoising diffusion probabilistic model (DDPM) for data augmentation with a graph attention network-based prediction module. Our approach achieved a $10\%$ improvement in AUC compared to state-of-the-art models for the six drugs studied, indicating \drdiff's superior generalization capabilities. Moreover, our experiments confirm the potential of generative models, a core component of our framework, to mitigate the inherent limitations of omics datasets by effectively augmenting gene expression data.
+The accurate prediction of drug responses based on the genomic profile
+of a patient is essential to progress in the field of precision
+medicine. The advent of various deep learning algorithms based on
+publicly available large-scale omics datasets is the driving force
+behind research in this field. The characteristics of biological
+datasets, characterized by high dimensions and low sample sizes, pose
+challenges of overfitting and limited generalization in prediction
+models. Additionally, constructing prediction models using biological
+data such as gene expression is further complicated by the need to
+account for the complex relationships among genes, which exacerbates
+the aforementioned challenges. To address these challenges, we propose
+a drug response prediction framework (DrDiff) that integrates a
+denoising diffusion probabilistic model (DDPM) based data augmentation
+module with a graph attention network-based drug response prediction
+module. The proposed model showed a $10 \%$ higher AUC than the
+state-of-theart models for drug response prediction for the six drugs
+considered in the study, suggesting the superior generalization
+performance of DrDiff over other baseline models. Furthermore, we
+demonstrated the feasibility of generative models, which form one of
+the modules of the proposed framework, in overcoming the fundamental
+limitations of omics datasets. Further experiments bear out the
+feasibility of generative models, which form one of the modules of the
+proposed framework, in augmenting gene expression data.
 %Our code and datasets can be found at~\url{https://github.com/seferlab/drdiff}.
 
 
@@ -86,380 +102,285 @@ prediction framework, called \drdiff, which combines a denoising diffusion proba
 
 \section{Introduction}
 
-Precision oncology, which aims to provide personalized cancer
-treatments based on the genetic characteristics of individual tumors,
-avoids ineffective treatments, emerging as a promising approach for
-improving patient outcomes and reducing healthcare costs~\cite{1}. This
-could be leveraged toward the advancement of web-based precision
-medicine, in light of the escalating availability of individual
-medical data~\cite{21}. Accurately predicting drug responses, which
-indicates how a specific drug is effective as a treatment, is greatly
-becoming important in the current precision oncology. However,
-variabilities in drug responses among patients, which are attributed to genetic variations, make obtaining accurate predictions
-challenging~\cite{2}. Many studies have been conducted on deep learning
-(DL) models that learn the genetic information of patients for drug
-response predictions, with many previous studies~\cite{3, 4} revealing that
-Gene Expression~(GE) data, which represents the measurement of the
-activity of genes is the most effective type of data for drug
-response predictions~\cite{6, 8, 22, 25}.
+Precision oncology, which aims to provide personalized cancer treatments based on the genetic characteristics of individual tumors, avoids ineffective treatments, emerging as a promising approach for improving patient outcomes and reducing healthcare costs [1]. This could be leveraged toward the advancement of web-based precision medicine, in light of the escalating availability of individual medical data [21, 27, 38]. Accurately predicting drug responses, which indicates how a specific drug is effective as a treatment, is greatly becoming important in the current precision oncology. However, variabilities in drug responses among patients, which are attributed to genetic variations, make obtaining accurate predictions challenging [2]. Many studies have been conducted on deep learning (DL) models that learn the genetic information of patients for drug response predictions, with many previous studies [3,4,5,6] revealing that Gene Expression (GE) data, which represents the measurement of the activity of genes is the most effective type of data for drug response predictions $[6,8,22,25,30,31,37]$.
 
-In bioinformatics, such as cancer subtype or drug response
-prediction studies using omics data including gene expression data, high dimension
-and low sample size of input data are fundamental challenges. Many
-features or variables with relatively few input data samples increase
-the risk of overfitting in training datasets and reduce the generality
-of prediction models~\cite{1, 23, 24}. Additionally, the robustness of
-such models is affected by outliers in datasets with small sample
-sizes. Therefore, it is essential to carefully balance the number of
-features and sample sizes when conducting data analysis, particularly
-for omics data, which are often characterized by large dimensions and
-small sample sizes. In this study, we aim to overcome these obstacles.
+In bioinformatics, such as cancer subtype or drug response prediction studies using omics data including GE data, high dimension and low sample size of input data are fundamental challenges. Many features or variables with relatively few input data samples increase the risk of overfitting in training datasets and reduce the generality of prediction models $[1,23,24]$. Additionally, the robustness of such models is affected by outliers in datasets with small sample sizes. Therefore, it is essential to carefully balance the number of features and sample sizes when conducting data analysis, particularly for omics data, which are often characterized by large dimensions and small sample sizes. In this study, we aim to overcome these obstacles.
 
-To effectively address the aforementioned problem, approaches from
-various perspectives have been proposed: Feature Selection, Data
-Augmentation, Utilizing Inductive Bias. The strategy from the feature
-selection perspective is to select only genes closely related to the
-drug or disease by utilizing biological pathways~\cite{9, 14}. The
-experimental results in these studies revealed that feature selection
-using biological pathways would be an appropriate approach to reduce
-high dimensionality. A second possible solution would be to augment
-training data by utilizing generative models, such as variational
-autoencoders~(VAEs)~\cite{4} and generative adversarial networks~(GANs)~\cite{19}, which have been actively studied in the field of image
-processing. Notably, there is a study that proposes improvements in
-cancer classification performance by augmenting GE data using a GAN
-and one that proposes a universal tabular generative model that can be
-applied to data such as gene expression data~\cite{5, 35}. However, these studies do not
-account for generative models neglecting to consider the relationship
-between genes when learning, which limits their ability to capture
-biological mechanisms. Additionally, the advancement in the field of
-generative models have led to the emergence of innovative models such
-as DDPM~\cite{17, 32}, which exceeds the capabilities of GAN and VAE. These models present new possibilities for utilization in augmentation tasks, which aim to alleviate data sparsity. Lastly, to overcome the degradation of model predictive power due to limited training data, a strategy is to use the relationships between genes as an inductive bias for the predictive model~\cite{3, 15}. This approach can
-be realized by utilizing graph neural networks that can learn the
-relationships between biological pathways obtainable from various
-databases~\cite{20}. However, to increase the predictive power
-more efficiently with limited data, there is a need for approaches
-that not only efficiently integrate multiple biological pathways but
-also better capture biological mechanisms by training models to
-identify the importance of relationships between genes in predicting
-drug responsiveness.
+To effectively address the aforementioned problem, approaches from various perspectives have been proposed: Feature Selection, Data Augmentation, Utilizing Inductive Bias. The strategy from the feature selection perspective is to select only genes closely related to the drug or disease by utilizing biological pathways [9, 14]. The experimental results in these studies revealed that feature selection using biological pathways would be an appropriate approach to reduce high dimensionality. A second possible solution would be to augment training data by utilizing generative models, such as variational autoencoders (VAEs) [4] and generative adversarial networks (GANs) [19], which have been actively studied in the field of image processing. Notably, there is a study that proposes improvements in cancer classification performance by augmenting GE data using a GAN and one that proposes a universal tabular generative model that can be applied to data such as GE data [5, 36]. However, these studies do not account for generative models neglecting to consider the relationship between genes when learning, which limits their ability to capture biological mechanisms. Additionally, the advancement in the field of generative models have led to the emergence of innovative models such as DDPM [17, 33], which exceeds the capabilities of GAN and VAE. These models present new possibilities for utilization in augmentation tasks, which aim to alleviate data sparsity. Lastly, to overcome the degradation of model predictive power due to limited training data, a strategy is to use the relationships between genes as an inductive bias for the predictive model [3, 15]. This approach can be realized by utilizing graph neural networks that can learn the relationships between biological pathways obtainable from various databases [20]. However, in order to increase the predictive power more efficiently with limited data, there is a need for approaches that not only efficiently integrate multiple biological pathways but also better capture biological mechanisms by training models to identify the importance of relationships between genes in predicting drug responsiveness.
 
-To overcome the limitations of existing studies, we propose a framework capable of addressing the overfitting problem in training data caused by the high dimensionality and low sample sizes in omics datasets in the context of drug response prediction. The proposed framework \drdiff comprises three main modules: 1- Feature selection
-through biological pathway analysis to solve the issue of high
-dimensionality, 2- Gene expression data augmentation utilizing diffusion-based
-generative models~(Diffusion-GE) to address the issue of low sample
-sizes, and 3- Drug response prediction using graph attention
-networks. The first module aims to solve the problem of high
-dimensionality by extracting the biological pathways most closely
-related to the target protein of each drug and selecting the genes
-that comprise these pathways. The second module aims to augment GE
-data by leveraging a recent generative model~(Denoising Diffusion
-Probabilistic Model), in which a graph autoencoder~(AE) is employed
-to capture biological mechanisms. The final module employs a graph
-attention network, which exploits prior knowledge about biological
-pathways to maximize the generalization of models from limited
-training data.
+To overcome the limitations of existing studies, we propose a framework capable of addressing the overfitting problem in training data caused by the high dimensionality and low sample sizes in omics datasets in the context of drug response prediction. The proposed framework DrDiff comprises three main modules: 1) feature selection through biological pathway analysis to solve the issue of high dimensionality, 2) GE data augmentation utilizing diffusion-based generative models (Diffusion-GE) to address the issue of low sample sizes, and 3) drug response prediction using graph attention networks. The first module aims to solve the problem of high dimensionality by extracting the biological pathways most closely related to the target protein of each drug and selecting the genes that comprise these pathways. The second module aims to augment GE data by leveraging a recent generative model (denoising diffusion probabilistic model), in which a graph autoencoder (AE) is employed to capture biological mechanisms. The final module employs a graph attention network, which exploits prior knowledge about biological pathways to maximize the generalization of models from limited training data.
 
 The main contributions of the study are summarized as follows:
-%
+
 \begin{itemize}
-\item To the best of our knowledge, this is the first study to adapt and enhance the recently developed Denoising Diffusion Probabilistic Model~(DDPM) for developing a GE data augmentation model that captures biological complexities and addresses the issue of omics~(gene expression) data scarcity.
-\item We present a novel approach for highly accurate drug response prediction. Our approach leverages the capabilities of a graph attention network, which effectively combines information from a wide range of biological pathways while also considering the proximity to target proteins.
-\item The proposed framework, \drdiff, demonstrated superior performance in drug response prediction on patient datasets not seen during training, surpassing other recent methods. Furthermore, we presented evidence of the generative module, a core component of our framework, consistently generating higher-quality data compared to data produced by other generative models.
+  \item To the best of our knowledge, this is the first study to adapt and enhance the recently developed Denoising Diffusion Probabilistic Model (DDPM) for developing a GE data augmentation model that captures biological complexities and addresses the issue of omics (gene expression) data scarcity.
+  \item We present a novel approach for highly accurate drug response prediction. Our approach leverages the capabilities of a graph attention network, which effectively combines information from a wide range of biological pathways while also considering the proximity to target proteins.
+  \item The proposed framework, DrDiff, demonstrated superior performance in drug response prediction on patient datasets not seen during training, surpassing other recent methods. Furthermore, we presented evidence of the generative module, a core component of our framework, consistently generating higherquality data compared to data produced by other generative models.
 \end{itemize}
-    
-\section{Related Work}
 
-Numerous approaches have been used for drug response predictions. Traditionally, machine learning techniques have been utilized to select crucial features for prediction~\cite{8, 11, 13, 18}, and AEs have been employed for feature extraction to enhance the prediction performances of models~\cite{36}. In recent years, with the advancement of various DL techniques, research on drug response predictions has evolved. One such model, Multi-Omics Late Integration~(MOLI)~\cite{29}, utilizes a deep neural network architecture that enables the integration of multiple omics data types at different stages of a network. Supervised feature extraction learning using triplet loss~(Super.FELT)~\cite{25}, on the other hand, employs feature selection to reduce the dimensionality of multi-omics data, followed by a supervised encoder that extracts crucial information from the reduced omics dataset. Then, it classifies the encoded omics datasets based on a neural network for drug response prediction. A novel model, DeepInsight-3D~\cite{30}, converts structured data into images using convolutional neural networks~(CNNs) for predicting patient-specific anticancer drug responses.
+\section*{2 Related Work}
+Numerous approaches have been used for drug response predictions. Traditionally, machine learning techniques have been utilized to select crucial features for prediction [8, 11, 13, 18], and AEs have been employed for feature extraction to enhance the prediction performances of models [37]. In recent years, with the advancement of various DL techniques, research on drug response predictions has evolved. One such model, Multi-Omics Late Integration (MOLI) [30], utilizes a deep neural network architecture that enables the integration of multiple omics data types at different stages of a network. Supervised feature extraction learning using triplet loss (Super.FELT) [25], on the other hand, employs feature selection to reduce the dimensionality of multi-omics data, followed by a supervised encoder that extracts crucial information from the reduced omics dataset. Then, it classifies the encoded omics datasets based on a neural network for drug response prediction. A novel model, DeepInsight-3D [31], converts structured data into images using convolutional neural networks (CNNs) for predicting patient-specific anticancer drug responses.
 
+\section*{3 Preliminaries}
+A set of biological pathways, denoted as $G=\left\{G_{1}, G_{2}, \ldots, G_{k}\right\}$, is defined on a set of subgraphs $G=(V, E)$. Subgraph $G$ denotes an undirected graph comprised of a set of nodes $v_{i} \in V$ and a set of edges $e_{i}=\left(v_{i}, v_{j}\right) \in \mathcal{E}$. Each node represents a gene, and an edge represents a relationship between genes.
 
-\section{Preliminaries}
-
-A set of biological pathways, denoted as $G = \{G_1, G_2, \ldots,
-G_k\}$, is defined on a set of subgraphs $G=(V, E)$. Subgraph $G$ denotes
-an undirected graph comprised of a set of nodes $v_i \in V$ and a set
-of edges $e_i = (v_i, v_j) \in \mathcal{E}$. Each node represents a gene, and an edge represents a relationship between genes.
-
-\subsection{DDPM}
-
-A Denoising Diffusion Probabilistic Model~(DDPM)~\cite{17} is designed to
-learn a Markov Chain that systematically transforms a basic probability distribution, often a random Gaussian distribution, into a distribution that resembles actual data. This generative process is essentially the reverse of the forward diffusion process within DDPM. In this forward process, a fixed Markov chain progressively introduces noise to data while sequentially sampling latent variables $x_0, x_1, \ldots, x_T$, all having the same dimensionality. Each step in the forward process is a Gaussian translation.
-%
-\begin{equation}\label{eq:1}
-q(x_t | x_{t-1}) := N(x_t; \sqrt{1-B_t} x_{t-1}, B_{t}\bf{I})
-\end{equation}
-%
-where $\beta_1, \beta_2, ldots, \beta_T$ are predetermined variance settings rather than parameters that the model learns. Eq.~\eqref{eq:1} calculates $x_T$ by introducing minor Gaussian noise to the latent variable. Given clean data $x_0$, the sampling of $x_T$ is expressed in a closed form by reparameterization trick as follows:
-%
-\begin{align}
- & q(x_t | x_{0}) = N(x_t; \sqrt{\overline{a}_t} x_0, (1-\overline{a}_t) \bf{I}) \label{eq:2} \\
-& x_t = \sqrt{\overline{a}_t} x_0 + \sqrt{1-\overline{a}_t} \epsilon \label{eq:3}
-\end{align}
-%
-where $\alpha_t := 1-\beta_t$, $\overline{\alpha}_t := \prod_{s=1}^{t} \alpha_s$, and $\epsilon \sim N(0, \bf{I})$ is a random Gaussian distribution with the same dimensionality as $x_0$.
-
-The training strategy of DDPM commences with the parameterization $p_{\theta}(x_{t-1} | x_t)$ of Gaussian transitions in the reverse direction of the forward process, which injects noise. Subsequently, the strategy culminates in training the reverse process's mean to predict the mean of the forward process to learn the reverse process's transition kernel.
-%
-\begin{align}
-p_{\theta}(x_{t-1} | x_t) = N(x_{t-1};   \mu_{\theta}(x_t, t),
-  \sigma_{t}^2 \bf{I}) \label{eq:4} \\
-L_{\text{simple}} :=  \mathbb{E}_{t, \epsilon, x_0} \left[ || \epsilon - \epsilon_{\theta} (\sqrt{\overline{a}_t} x_0 +
-  \sqrt{1-\overline{a}_t} \epsilon, t) ||^2 \right] \label{eq:5}
-\end{align}
-
-Eq.~\eqref{eq:2} provides an efficient method to jump directly to an
-arbitrary step in the forward noise process, making it possible to
-randomly sample $t$ during training. To predict $\mu_{\theta}(x_t, t)$
-efficiently,~\cite{17} adopted a specific parameterization
-approach based on Eq.~\eqref{eq:4}-\eqref{eq:5}. Hence, a trainable neural
-network could predict the noise added to $x_0$. These authors found that
-using $\epsilon$ in prediction produced the best results, especially
-when it was combined with a reweighted loss function as in Eq.~\eqref{eq:5}.
+\subsection*{3.1 DDPM}
+A Denoising Diffusion Probabilistic Model (DDPM) [17] is designed to learn a Markov Chain that systematically transforms a basic probability distribution, often a random Gaussian distribution, into a distribution that resembles actual data. This generative process is essentially the reverse of the forward diffusion process within DDPM. In this forward process, a fixed Markov chain progressively introduces noise to data while sequentially sampling latent variables $x_{0}, x_{1}, \ldots, x_{T}$, all having the same dimensionality. Each step in the forward process is a Gaussian translation.
 
 
-\section{Framework Design}
+\begin{equation*}
+q\left(x_{t} \mid x_{t-1}\right):=N\left(x_{t} ; \sqrt{1-B_{t}} x_{t-1}, B_{t} \mathbf{I}\right) \tag{1}
+\end{equation*}
 
-In this section, we introduce the proposed \drdiff framework for drug response prediction. Figure~\ref{fig:1} illustrates the overall process of the proposed framework.
 
-\subsection{Network Analysis for Feature Selection}\label{sec:network}
+where $\beta_{1}, \beta_{2}$, ldots, $\beta_{T}$ are predetermined variance settings rather than parameters that the model learns. Eq. (1) calculates $x_{T}$ by introducing minor Gaussian noise to the latent variable. Given clean data $x_{0}$, the sampling of $x_{T}$ is expressed in a closed form by reparameterization trick as follows:
 
-To identify the biological pathways that most significantly impact drug response prediction results, the proximal pathways that are statistically associated with drug-associated genes need to be identified. We calculated the proximal pathway by measuring the distance from the drug-associated genes to each pathway as seen in Figure~\ref{fig:1}A, by using the method proposed in~\cite{14}. The measurement was based on the average shortest path lengths between the drug-associated genes and the nearest pathway genes, according to:
-%
-\begin{equation}
-d_{\text{closest}} = \frac{1}{|T|} \sum_{t \in T} \min_{s \in S} d(s,t)
-\end{equation}
-%
-where $T$ represents the set of drug-associated genes~(target genes), $S$ represents the pathway genes, and $d(s, t)$ is the shortest path
-between the drug-associated and pathway genes. 
 
-To identify whether the calculated distance for each pathway was statistically significant regardless of the number of nodes~(genes) that made up the pathway, random genes were bootstrapped to generate a reference distribution. We randomly selected genes by matching the size and number of the network neighbors~(degree) of the original drug-associated genes and pathway genes and computed the closest distance. The mean and standard deviation of the reference distribution were used to calculate the $z$-scores. When the $z$-scores for each pathway were sorted in ascending order, the top $K$ pathways were considered proximal. Finally, among all the genes, those that
-most significantly impacted drug response predictions, namely those
-included in the selected pathways, were selected for further analysis.
+\begin{align*}
+& q\left(x_{t} \mid x_{0}\right)=N\left(x_{t} ; \sqrt{\bar{a}_{t}} x_{0},\left(1-\bar{a}_{t}\right) \mathbf{I}\right)  \tag{2}\\
+& x_{t}=\sqrt{\bar{a}_{t}} x_{0}+\sqrt{1-\bar{a}_{t}} \epsilon \tag{3}
+\end{align*}
 
-% \begin{figure}[!h]
-% \centering
-% \includegraphics[width=0.99\textwidth]{fig1.png}
-% \caption{Overview of the proposed \drdiff framework.}
-% \label{fig:1}
-% \end{figure}
 
-\subsection{Data Augmentation and Generalization}\label{sec:augment}
+where $\alpha_{t}:=1-\beta_{t}, \bar{\alpha}_{t}:=\prod_{s=1}^{t} \alpha_{s}$, and $\epsilon \sim N(0, \mathbf{I})$ is a random Gaussian distribution with the same dimensionality as $x_{0}$.
 
-This subsection introduces the second module of the proposed framework, a novel data augmentation method that addresses the lack of generalization due to insufficient training data as seen in Figure~\ref{fig:1}B. The module comprises two main components. The first component leverages the graph AE to map gene expression data to the latent space. The second component generates the latent space obtained using the DDPM. Finally, the augmented latent space is converted back to the gene expression data level using the trained decoder of the graph AE as seen in Algorithm~\ref{alg:1}.
+The training strategy of DDPM commences with the parameterization $p_{\theta}\left(x_{t-1} \mid x_{t}\right)$ of Gaussian transitions in the reverse direction of the forward process, which injects noise. Subsequently, the strategy culminates in training the reverse process's mean to predict the mean of the forward process in order to learn the transition kernel of the reverse process.
 
-\subsubsection{Graphical Compression of Gene Expression Profiles}\label{sec:compress}
+\[
+\begin{array}{r}
+p_{\theta}\left(x_{t-1} \mid x_{t}\right)=N\left(x_{t-1} ; \mu_{\theta}\left(x_{t}, t\right), \sigma_{t}^{2} \mathbf{I}\right) \\
+L_{\text {simple }}:=\mathbb{E}_{t, \epsilon, x_{0}}\left[\left\|\epsilon-\epsilon_{\theta}\left(\sqrt{\bar{a}_{t}} x_{0}+\sqrt{1-\bar{a}_{t}} \epsilon, t\right)\right\|^{2}\right] \tag{5}
+\end{array}
+\]
 
-The proposed graphical compression model was based on the AE architecture. It took the network information of the biological pathways representing the top $K$ pathways proximal to the target protein extracted through the method described in section~\ref{sec:network} as an input and encoded this into a graph representation latent space. The gene expression data $X \in R^{N \times d}$ input to the AE model represented each biological pathway~(extracted in Section~\ref{sec:network}) as one subgraph, as shown in section~\ref{sec:gat}, where the node features of the subgraph comprised gene expression profiles and gene indicators. Likewise, the encoder layer is defined with the same architecture as the graph attention layer used in Section~\ref{sec:gat}, and the affine layer was added to produce latent representations $X \in R^{N \times d} (d << D)$ of the input data after the graph attention operation. Subsequently, a decoder comprising affine layers was trained to reconstruct the initial node state, which contained only the gene expression profiles. Training was
-done by optimizing the $L_{\text{graphAE}}$ loss function with respect to $\phi$ and $\psi$ as follows:
-%
-\begin{equation}
-L_{\text{GraphAE}} = \sum_{i=1}^{N} (x_i - De_{\phi}(En_{\psi}(x_i, G)))^2
-\end{equation}
+Eq. (2) provides an efficient method to jump directly to an arbitrary step in the forward noise process, making it possible to randomly sample $t$ during training. To predict $\mu_{\theta}\left(x_{t}, t\right)$ efficiently, [17] adopted a specific parameterization approach based on Eq. (4)-(5). Hence, a trainable neural network could predict the noise added to $x_{0}$. These authors found that using $\epsilon$ in prediction produced the best results, especially when it was combined with a reweighted loss function as in Eq. (5).
+
+\section*{4 Framework Design}
+In this section, we introduce the proposed DrDiff framework for drug response prediction. Figure 1 illustrates the overall process of the proposed framework.
+
+\subsection*{4.1 Network Analysis for Feature Selection}
+To identify the biological pathways that most significantly impact drug response prediction results, the proximal pathways that are statistically associated with drug-associated genes need to be identified. We calculated the proximal pathway by measuring the distance from the drug-associated genes to each pathway as seen in Figure 1A, by using the method proposed in [14]. The measurement was based on the average shortest path lengths between the drug-associated genes and the nearest pathway genes, according to:
+
+
+\begin{equation*}
+d_{\text {closest }}=\frac{1}{|T|} \sum_{t \in T} \min _{s \in S} d(s, t) \tag{6}
+\end{equation*}
+
+
+where $T$ represents the set of drug-associated genes (target genes), $S$ represents the pathway genes, and $d(s, t)$ is the shortest path between the drug-associated and pathway genes.
+
+To identify whether the calculated distance for each pathway was statistically significant regardless of the number of nodes (genes) that made up the pathway, random genes were bootstrapped to generate a reference distribution. We randomly selected genes by matching the size and number of the network neighbors (degree) of the original drug-associated genes and pathway genes and computed the closest distance. The mean and standard deviation of the reference distribution were used to calculate the $z$-scores. When the $z$-scores for each pathway were sorted in ascending order, the top $K$ pathways were considered proximal. Finally, among all the genes, those that most significantly impacted drug response predictions, namely those included in the selected pathways, were selected for further analysis.
+
+\subsection*{4.2 Data Augmentation and Generalization}
+This subsection introduces the second module of the proposed framework, a novel data augmentation method that addresses the lack of generalization due to insufficient training data as seen in Figure 1B. The module comprises two main components. The first component leverages the graph AE to map gene expression data to the latent space. The second component generates the latent space obtained using the DDPM. Finally, the augmented latent space is converted back to the gene expression data level using the trained decoder of the graph AE as seen in Algorithm 1.
+
+\subsection*{4.2.1 Graphical Compression of Gene Expression Profiles}
+The proposed graphical compression model was based on the AE architecture. It took the network information of the biological pathways representing the top $K$ pathways proximal to the target protein extracted
+
+\begin{figure}[h]
+\begin{center}
+  \includegraphics[width=\textwidth]{framework}
+\captionsetup{labelformat=empty}
+\caption{Figure 1: Overview of the proposed DrDiff framework.}
+\end{center}
+\end{figure}
+
+\begin{verbatim}
+Algorithm 1 Overall data augmentation process
+        Input
+    $x \leftarrow$ Gene expression data
+    $c \leftarrow$ Response labels for the records in $x$
+    $G \leftarrow$ Graph information
+    $\psi, \phi \leftarrow$ Weights for the AE
+    $\theta \leftarrow$ Weights for the generative (diffusion) model
+    repeat
+        Take gradient descent step at $\nabla_{\psi}\left\|x-D e_{\phi}\left(E n_{\psi}(x, G)\right)\right\|^{2}, \nabla_{\phi}\left\|x-D e_{\phi}\left(E n_{\psi}(x, G)\right)\right\|^{2}$
+    until converged
+    repeat
+        $\left(x_{0}, c\right) \sim p(x, c)$
+        $r_{0} \sim E n_{\psi}\left(x_{0}, A\right)$
+        $t \sim \operatorname{Uniform}(\{1, . . ., T\})$
+        $\epsilon \leftarrow N(0, \mathbf{I})$
+        Take gradient descent step at $\nabla_{\theta}\left\|\epsilon-\epsilon_{\theta}\left(\sqrt{\bar{a}_{t}} r_{0}+\sqrt{1-\bar{a}_{t}} \epsilon, t, c\right)\right\|^{2}$
+    until converged
+    $r_{T} \leftarrow N(0, \boldsymbol{I})$
+    for $t=T, \ldots, 1$ do
+        $z \sim N(0, \mathbf{I})$ if $t>1$, else $z=0$
+        $r_{t-1}=\frac{1}{\sqrt{a_{t}}}\left(r_{t}-\frac{1-a_{t}}{\sqrt{1-\bar{a}_{t}}} \epsilon_{\theta}\left(r_{t}, t, c\right)\right)+\sigma_{t} z$
+    end for
+    return $r_{0}$
+    Augmented sample $\leftarrow D e_{\phi}\left(r_{O}\right)$
+\end{verbatim}
+
+through the method described in section 4.1 as an input and encoded this into a graph representation latent space. The gene expression data $X \in R^{N \times d}$ input to the AE model represented each biological pathway (extracted in Section 4.1) as one subgraph, as shown in section 4.3.1, where the node features of the subgraph comprised gene expression profiles and gene indicators. Likewise, the encoder layer is defined with the same architecture as the graph attention layer used in Section 4.3.1, and the affine layer was added to produce\\
+latent representations $X \in R^{N \times d}(d \ll D)$ of the input data after the graph attention operation. Subsequently, a decoder comprising affine layers was trained to reconstruct the initial node state, which contained only the gene expression profiles. Training was done by optimizing the $L_{\text {graphAE }}$ loss function with respect to $\phi$ and $\psi$ as follows:
+
+
+\begin{equation*}
+L_{\text {GraphAE }}=\sum_{i=1}^{N}\left(x_{i}-D e_{\phi}\left(E n_{\psi}\left(x_{i}, G\right)\right)\right)^{2} \tag{7}
+\end{equation*}
+
 
 Subsequently, the generative model introduced in the next section is designed to generate the latent space extracted in this section.
 
-\subsubsection{Generative Modeling of Latent Space}
+\subsection*{4.2.2 Generative Modeling of Latent Space}
+Regarding the trained graph AE model, which comprised $E n_{\psi}$ and $D e_{\phi}$, it had access to a low-dimensional latent space containing information about biological relationships. Additionally, contrasting with the image generation task in which the DDPM is commonly used, in this study, this model required modifications to generate latent spaces containing gene expression information and the relationships between genes.
 
-Regarding the trained graph AE model, which comprised $En_{\psi}$ and $De_{\phi}$, it had access to a low-dimensional latent space containing information about biological relationships. Additionally, contrasting with the image generation task in which the DDPM is commonly used, in this study, this model required modifications to generate latent spaces containing gene expression information and the relationships between genes.
+In the field of image generation, the backbone architecture of the DDPM-based model is implemented as U-Net [28] because CNN operations that form the U-Net architecture align well with the inductive bias of image-like data. However, in our case, adopting a CNN-based U-Net model as a backbone architecture is inappropriate because, unlike images, the data to be covered do not exhibit locality or dependencies among neighboring pixels. Therefore, considering the characteristics of the gene expression data, we updated the backbone architecture from a convolution layer to an affine layer.
 
-In the field of image generation, the backbone architecture of the
-DDPM-based model is implemented as U-Net~\cite{unet} because CNN
-operations that form the U-Net architecture align well with the
-inductive bias of image-like data. However, in our case, adopting a
-CNN-based U-Net model as a backbone architecture is inappropriate
-because, unlike images, the data to be covered do not exhibit locality
-or dependencies among neighboring pixels. Therefore, considering the
-characteristics of the gene expression data, we updated the backbone architecture from a convolution layer to an affine layer.
+The module discussed in this section enhances the predictive performance of the model in determining the sensitivity or resistance of a sample to a drug, by increasing the amount of training data. To achieve this, instead of unconditionally generating samples, samples with labeled indications of their sensitivities or resistances to drugs should be generated. In the conditional generation setting, the input data $x_{0}$ had an associated condition term (sensitive group and drug-resistant group). Then, the diffusion model is needed to be modified to include condition term $c$ as an input to the reverse process for learning a conditioned generative model $p_{\theta}\left(x_{0} \mid c\right)$.
 
-The module discussed in this section enhances the predictive
-performance of the model in determining the sensitivity or resistance
-of a sample to a drug, by increasing the amount of training data. To
-achieve this, instead of unconditionally generating samples, samples
-with labeled indications of their sensitivities or resistances to
-drugs should be generated. In the conditional generation setting, the
-input data $x_0$ had an associated condition term~(sensitive group and
-drug-resistant group). Then, the diffusion model needs to be modified to include condition term $c$ as an input to the reverse process for learning a conditioned generative model $p_{\theta}(x_0|c)$.
-%
-\begin{equation}
-p_{\theta}(x_{t-1}|x_t) = N(x_{t-1}; \mu_{\theta}(x_t, t, c), \sigma_{t}^2\bf{I})
-\end{equation}
 
-The reverse process, in which denoising occurs, is transformed into a
-conditional probability according to the given condition. Additionally, the
-injection of noise is the same for data belonging to any class,
-indicating that the forward process is not transformed based on the
-condition or class of the data. When the mean in the reverse process
-changes from $\mu_{\theta}(x_t, t)$ to $\mu_{\theta}(x_t, t, c)$, $c$ should be added as an extra input to the trainable backbone architecture function approximators. In this case, depending on the modification of the reverse process, the original simplified loss function as defined in Eq.~\eqref{eq:5} can be rewritten as follows:
-%
-\begin{equation}
-L_{\text{cond}} :=  \mathbb{E}_{t, \epsilon, x_0} \left[ || \epsilon - \epsilon_{\theta} (\sqrt{\overline{a}_t} x_0 + \sqrt{1-\overline{a}_t} \epsilon, t, c) ||^2 \right]
-\end{equation}
+\begin{equation*}
+p_{\theta}\left(x_{t-1} \mid x_{t}\right)=N\left(x_{t-1} ; \mu_{\theta}\left(x_{t}, t, c\right), \sigma_{t}^{2} \mathbf{I}\right) \tag{8}
+\end{equation*}
 
-To sample latent variables that encompass biological information under specific conditions, it is necessary to adjust the stochastic generation step, which has been redefined as ancestral sampling by~\cite{17, 33}. The objective is to modify the inference process to generate stochastic samples that align with the specified conditions. This modification can be described as follows:
-%
-\begin{equation}
-x_{t-1} = \frac{1}{\sqrt{\alpha_t}} \left( x_t - \frac{1-\alpha_t}{\sqrt{1-\overline{\alpha}_t}} \right) \epsilon_{\theta}(x_t, t, c) + \sigma_t z
-\end{equation}
-%
+
+The reverse process, in which denoising occurs, is transformed into a conditional probability according to the given condition. Additionally, the injection of noise is the same for data belonging to any class, indicating that the forward process is not transformed based on the condition or class of the data. When the mean in the reverse process changes from $\mu_{\theta}\left(x_{t}, t\right)$ to $\mu_{\theta}\left(x_{t}, t, c\right), c$ should be added as an extra input to the trainable backbone architecture function approximators. In this case, depending on the modification of the reverse process, the original simplified loss function as defined in Eq. (5) can be rewritten as follows:
+
+
+\begin{equation*}
+L_{\mathrm{cond}}:=\mathbb{E}_{t, \epsilon, x_{0}}\left[\left\|\epsilon-\epsilon_{\theta}\left(\sqrt{\bar{a}_{t}} x_{0}+\sqrt{1-\bar{a}_{t}} \epsilon, t, c\right)\right\|^{2}\right] \tag{9}
+\end{equation*}
+
+
+To sample latent variables that encompass biological information under specific conditions, it is necessary to adjust the stochastic generation step, which has been redefined as ancestral sampling by [17, 34]. The objective is to modify the inference process to generate stochastic samples that align with the specified conditions. This modification can be described as follows:
+
+
+\begin{equation*}
+x_{t-1}=\frac{1}{\sqrt{\alpha_{t}}}\left(x_{t}-\frac{1-\alpha_{t}}{\sqrt{1-\bar{\alpha}_{t}}}\right) \epsilon_{\theta}\left(x_{t}, t, c\right)+\sigma_{t} z \tag{10}
+\end{equation*}
+
+
 Finally, we performed decoding from the generated latent space to the gene expression data via a trained graph AE model.
 
-Section~\ref{sec:response} describes the data augmentation method proposed for gene expression profiles to improve the generalization performance of drug response prediction models. This method aims to overcome the difficulty of generating gene expression data by using a compression~(Graph AE) model to map a low-dimensional latent space from GE data that captures biological structure information and then generates that latent space with the DDPM model; this method offers several advantages. By employing a graph AE to capture biological relationships during generative model training, the difficulty of model training is relatively reduced. Furthermore, mapping high-dimensional gene expression data to a low-dimensional latent space decreases computational complexity.
+Section 4.3 describes the data augmentation method proposed for gene expression profiles to improve the generalization performance of drug response prediction models. This method aims to overcome the difficulty of generating gene expression data by using a compression (Graph AE) model to map a lowdimensional latent space from GE data that captures biological structure information and then generating that latent space with DDPM model; this method offers several advantages. By employing a graph AE to capture biological relationships during generative model training, the difficulty of model training is relatively\\
+reduced. Furthermore, mapping high-dimensional gene expression data to a low-dimensional latent space decreases computational complexity.
 
-\subsection{Drug Response Prediction with Graph Network}\label{sec:response}
+\subsection*{4.3 Drug Response Prediction with Graph Network}
+This section presents the final module of the proposed framework, which is a drug-response prediction method that employs graph attention networks as in Figure 1C. Specifically, each biological pathway was represented as a subgraph $G=(V, E)$, and the graph attention network model was applied to each subgraph to learn the patterns of the gene relationships. Further details of this method are provided below.
 
-This section presents the final module of the proposed framework,
-which is a drug-response prediction method that employs graph
-attention networks as in Figure~\ref{fig:1}C. Specifically, each biological
-pathway was represented as a subgraph $G=(V, E)$, and the graph
-attention network model was applied to each subgraph to learn the
-patterns of the gene relationships. Further details of this method
-are provided below.
+\subsection*{4.3.1 Graph Attention Network}
+Each subgraph consisted of initial node features $X_{i}=H_{v_{i}}^{0} \in R^{N \times F}$ and edges $\left(v_{i}, v_{j}\right)$ describe the interaction between nodes. The node features comprised gene expression and indicators. Gene indicators were uniquely assigned to each gene using a trainable embedding matrix, resembling the process of token embedding in BERT [7]. Furthermore, nodes belonging to different biological pathways that corresponded to the same gene symbol shared the same gene-embedding space. The linkage information for each gene was extracted using the adjacency matrix obtained by preprocessing the data parsed from the Kyoto Encyclopedia of Genes and Genomes (KEGG) database. Then, we adopted a graph learning method that employs the attention mechanism proposed in [29] after the establishment of graph representation; this method is represented as follows:
 
-\subsubsection{Graph Attention Network}\label{sec:gat}
+\[
+\begin{array}{r}
+h_{v_{i}}^{l+1, k}=\sigma\left(\sum_{v_{j} \in N\left(v_{i}\right)} a_{i, j}^{l, k} H_{v_{j}}^{l, k} W^{l, k}\right), G_{K} \in G \\
+a_{i, j}^{l, k}=\sigma\left(\left(H_{v_{i}}^{l, k} W^{l, k}\right) C^{l, G}\left(H_{v_{j}}^{l, k} W^{l, k}\right)^{T}\right) \tag{12}
+\end{array}
+\]
 
-Each subgraph consisted of initial node features $X_i = H_{v_i}^{0} \in R^{N \times F}$ and edges $(v_i, v_j)$ describe the interaction between nodes. The node features comprised gene expression and indicators. Gene indicators were uniquely assigned to each gene using a trainable embedding matrix, resembling the process of token embedding in BERT~\cite{7}. Furthermore, nodes belonging to different biological
-pathways corresponding to the same gene symbol shared the same
-gene-embedding space. The linkage information for each gene was
-extracted using the adjacency matrix obtained by preprocessing the
-data parsed from the Kyoto Encyclopedia of Genes and Genomes~(KEGG)
-database. Then, we adopted a graph learning method that employs the
-attention mechanism proposed in~\cite{28} after the establishment of graph representation; this method is represented as follows:
-%
-\begin{align}
-h_{v_i}^{l+1, k} = \sigma \left( \sum_{v_j \in N(v_i)} a_{i,j}^{l, k} H_{v_j}^{l, k} W^{l, k}\right), G_K \in G\\
-a_{i,j}^{l, k} = \sigma \left( (H_{v_i}^{l, k}W^{l, k}) C^{l, G} (H_{v_j}^{l, k}W^{l, k})^{T} \right)
-\end{align}
-%
-where $N(v_i) = \{v_j: (v_i, v_j) \in E\}$ denotes the set of neighbors of $v_i \in V$. $k$ indicates index of set of subgraphs and $H_{v_i}^{l, k}$ denotes hidden vector of $v_i$ node of $l$-th layer and $k$-th subgraph. And the $i$-th node state is updated as a function of the previous node state, $W^{l, k}$ are learnable parameters of the $l$-th layer, $\sigma(.)$ is an activation function, $a_{i, j}^{l, k}$ denotes an attention coefficient that measures the importance of the $j$-th node in updating the $i$-th state, and $C$ represents the coupling matrix that combines the information of the $i$-th and $j$-th nodes in the graph. Regarding $C$, it is a learned parameter matrix that captures the pairwise relationship between nodes and calculates attention coefficients.
+where $N\left(v_{i}\right)=\left\{v_{j}:\left(v_{i}, v_{j}\right) \in E\right\}$ denotes the set of neighbors of $v_{i} \in V . k$ indicates index of set of subgraphs and $H_{v_{i}}^{l, k}$ denotes hidden vector of $v_{i}$ node of $l$-th layer and $k$-th subgraph. And the $i$-th node state is updated as a function of the previous node state, $W^{l, k}$ are learnable parameters of the $l$-th layer, $\sigma($.$) is an activation function, a_{i, j}^{l, k}$ denotes an attention coefficient that measures the importance of the $j$-th node in updating the $i$-th state, and $C$ represents the coupling matrix that combines the information of the $i$-th and $j$-th nodes in the graph. Regarding $C$, it is a learned parameter matrix that captures the pairwise relationship between nodes and calculates attention coefficients.
 
-\subsubsection{Readout, Concatenation, and Drug Response Predictions}
-
-After all the nodes in each subgraph were updated, a readout function
-was used to aggregate information in one subgraph. And concatenate
-operation integrated the distance information of the target protein
-for the biological pathway representing that subgraph with the
-information of the nodes in that subgraph as in Eq.~\eqref{eq:14}.
-%
-\begin{equation}\label{eq:13}
-Z_{G} = concat(d_k^{-1} * MLP_{readout}(H^{L, k}) \; |  \; k = 0, \ldots, K)
-\end{equation}
-%
-where $d_k$ represents the distance between the target protein and its
-subgraph~(biological pathway), $H^{L, k}$ represents the final node state
-of $k$-th subgraph~(The encoder layer of the graph autoencoder in Section~\ref{sec:compress} is also constructed as in Eq.~\eqref{eq:14}). After the information from all the networks was combined, it was concatenated to form a representation vector, which was then used to predict the final task of the drug response, as below.
-%
-\begin{equation}\label{eq:14}
-y_{pred} = MLP_{pred}(Z_G)
-\end{equation}
-
-There are two important differences between the approach discussed in
-the current subsection and the model proposed by Ryu et al~\cite{28}. First,
-among the features of the nodes that comprised each subgraph, the gene
-indicator was extracted from a shared trainable gene-embedding
-matrix. Such extraction from a shared matrix enables networks to leverage
-shared information across all the biological pathways while still
-learning the specific characteristics of each pathway. In other words,
-by sharing the gene-embedding matrix, the networks could exploit the
-commonalities~(identical genes) between different pathways while still
-learning their unique differences~(geometric information). Second, by
-incorporating this distance information from the target protein into
-the readout function, the model could better capture the relationship
-between gene expression and drug response, thereby making more
-accurate predictions. Such accuracy increase is mainly due to genes that are closer to the target protein having a greater effect on drug response than genes that are further away~\cite{14}.
+\subsection*{4.3.2 Readout, Concatenation, and Drug Response Predictions}
+After all the nodes in each subgraph were updated, a readout function was used to aggregate information in one subgraph. And concatenate operation integrated the distance information of the target protein for the biological pathway representing that subgraph with the information of the nodes in that subgraph as in Eq. (14).
 
 
-\section{Experiments}\label{sec:experiments}
+\begin{equation*}
+Z_{G}=\operatorname{concat}\left(d_{k}^{-1} * M L P_{\text {readout }}\left(H^{L, k}\right) \mid k=0, \ldots, K\right) \tag{13}
+\end{equation*}
 
-This section presents the evaluation of the performance of the
-proposed framework in terms of its prediction performance for drug
-responses, and generation performance for gene expression data. To
-verify these aspects, we conducted various experiments, which are
-described over the following subsections:
 
-\textbf{Drug Response Prediction Performance}: This subsection
-describes the improvement in the performance of drug response
-prediction by using \drdiff over baselines and focuses on analyzing any potential differences in performance between the complete framework and the framework without augmentation module.
+where $d_{k}$ represents the distance between the target protein and its subgraph (biological pathway), $H^{L, k}$ represents the final node state of $k$-th subgraph (The encoder layer of the graph autoencoder in Section 4.2.1 is also constructed as in Eq. (14)). After the information from all the networks was combined, it was concatenated to form a representation vector, which was then used to predict the the final task of the drug response, as below.
 
-\textbf{Synthetic Data Quality}: This subsection compares the data generated by the proposed model with those generated by other baseline generation models and discusses the effectiveness of the proposed model in capturing the distribution of real data.
 
-\textbf{Searching for Optimal Hyperparameters}: This subsection
-details the number of biological pathways selected during the process
-under the first module and the number of augmented data points needed
-in the second module for obtaining the best performance. 
+\begin{equation*}
+y_{\text {pred }}=M L P_{\text {pred }}\left(Z_{G}\right) \tag{14}
+\end{equation*}
 
-\subsection{Experimental Setup}\label{sec:setup}
 
-We used the same dataset setup as that used in a previous study~\cite{29}; the training set consisted of samples composed of gene expression values and the corresponding drug response values for cell lines from the Genomics of Drug Sensitivity in Cancer~(GDSC)
-database. For the drug response labels~(resistance/sensitive), we
-applied the experimentally determined cutoffs from previous
-study~\cite{18} to separate sensitive and resistant samples for each drug. The
-test set consisted of gene expression values and drug response
-information for patients from The Cancer Genome Atlas~(TCGA)
-resource~\cite{8} and Patient-Derived Xenograft~(PDX) encyclopedia~\cite{10}. The data were downloaded from the Zenodo repository~\cite{29}.
+There are two important differences between the method discussed in the current subsection and the model proposed by Ryu et al. First, among the features of the nodes that comprised each subgraph, the gene indicator was extracted from a shared trainable gene-embedding matrix. Such extration from shared matrix enables networks to leverage shared information across all the biological pathways while still learning the specific characteristics of each pathway. In other words, by sharing the gene-embedding matrix, the networks could exploit the commonalities (identical genes) between different pathways while still learning\\[0pt]
+their unique differences (geometric information). Second, by incorporating this distance information from the target protein into the readout function, the model could better capture the relationship between gene expression and drug response, thereby making more accurate predictions. Such accuracy increase is mainly due to genes that are closer to the target protein haveing a greater effect on drug response than genes that are further away [14].
 
-To obtain information regarding gene interactions or connections, we utilized the Search Tool for the Retrieval of Interacting Genes/Proteins~(STRING)~\cite{34} database to acquire Protein-Protein interaction~(PPI) data, focusing on high-confidence links and selecting the largest connected component of the interactome. To ensure that only relevant interactions were considered, pathways and drugs with no genes in the PPI network were filtered out, resulting in 1864 biological pathways.
+\section*{5 Experiments}
+This section presents the evaluation of the performance of the proposed framework in terms of its prediction performance for drug responses, and generation performance for gene expression data. To verify these aspects, we conducted various experiments, which are described over the following subsections:
 
-\subsection{Drug Response Prediction Performance}\label{sec:drug}
+Drug Response Prediction Performance: This subsection describes the improvement in the performance of drug response prediction by using DrDiff over baselines and analyzes any potential differences in performance between the complete framework and the framework without augmentation module.
 
-\subsubsection{Experimental Setting}\label{sec:drugexp}
+Synthetic Data Quality: This subsection compares the data generated by the proposed model with those generated by other baseline generation models and discusses the effectiveness of the proposed model in capturing the distribution of real data.
 
-To train and validate the model, the GDSC dataset~(train), PDX/TCGA~(test) datasets were used for each of the six drugs. For a fairer comparison, we retained the training, test set construction, set of drugs, and evaluation metrics that are employed in previous studies~\cite{25,29,30}. The training sets were divided at an 80:20 ratio to validate the trained models. We performed a stratified $5$-fold cross-validation within the training set to determine the optimal number of epochs based on early stopping as well as the optimal optimizer. In early stopping, training of the neural network was terminated when the validation loss stopped decreasing, with the patience value set to $15$. The synthetic data obtained in section~\ref{sec:response} were not included in the validation subsets during training, but only in the training subset. The data augmentation rate for the drug response prediction was set to $75\%$ of the real sample. This ratio represented the generally ideal augmentation ratio obtained through
-the "searching optimal hyperparameter" experiment described later in
-section~\ref{sec:hyper}. For example, if the number of samples per
-label~(resistant/sensitive) in the real data are $n$ and $m$ respectively, the number of samples per label in the synthetic sample will be $\frac{(n+m)}{2}$. The
-evaluation of the synthetic data is detailed in section~\ref{sec:syn}. We
-measured the AUC values of the test set~(PDX/TCGA) by using the
-parameters with the highest average AUC values in the validation set.
+Searching for Optimal Hyperparameters: This subsection details the number of biological pathways selected during the process under the first module and the number of augmented data points needed in the second module for obtaining the best performance. The results are presented in Appendix.
 
-\subsubsection{Baselines}
+\subsection*{5.1 Experimental Setup}
+We used the same dataset setup as that used in a previous study [30]; the training set consisted of samples composed of gene expression values and the corresponding drug response values for cell lines from the Genomics of Drug Sensitivity in Cancer (GDSC) database. For the drug response labels (resistance/sensitive), we applied the experimentally determined cutoffs from previous study [18] to separate sensitive and resistant samples for each drug. The test set consisted of gene expression values and drug response information for patients from The Cancer Genome Atlas (TCGA) resource [8] and Patient-Derived Xenograft (PDX) encyclopedia [10]. The data were downloaded from the Zenodo repository [30].
 
-We evaluated the performance of several state-of-the-art methods for
-anti-cancer drug response prediction using multi-omics
-data. Specifically, three recently developed methods, MOLI,
-Super.FELT, and DeepInsight-3D, were used as benchmarks for comparison. In addition to these methods, nonnegative matrix factorization~(NMF), feedforward network~(FFN), and the method proposed by Geeleher et al in~\cite{29} were included in the comparison analysis. Moreover, further comparison was conducted with other methods mentioned in a previous study~\cite{25}, including the autoencoder~(AE), artificial neural network after feature selection~(ANNF), AutoBoruta Random Forest~(ABRF), and Support Vector Machine~(SVM). Finally, we compared the proposed framework with TabNet~\cite{2}, a common model used in similar tasks with tabular data.
+To obtain information regarding gene interactions or connections, we utilized the Search Tool for the Retrieval of Interacting Genes/Proteins (STRING) [35] database to acquire Protein-Protein interaction (PPI) data, focusing on high-confidence links and selecting the largest connected component of the interactome. To ensure that only relevant interactions were considered, pathways and drugs with no genes in the PPI network were filtered out, resulting in 1864 biological pathways.
 
-\subsubsection{Performance Comparison}\label{sec:realperform}
+\subsection*{5.2 Drug Response Prediction Performance}
+\subsection*{5.2.1 Experimental Setting}
+To train and validate the model, the GDSC dataset (train), PDX/TCGA (test) datasets were used for each of the six drugs. For a fairer comparison, we retained the training, test set construction, set of drugs, and evaluation metrics that are employed in previous studies [25, 30, 31]. The training sets were divided at an $80: 20$ ratio to validate the trained models. We performed a stratified 5 -fold cross-validation within the training set to determine the optimal number of epochs based on early stopping as well as the optimal optimizer. In early stopping, training of the neural network was terminated when the validation loss stopped decreasing, with the patience value set to 15 . The synthetic data obtained in section 4.3 were not included in the validation subsets during training, but only in the training subset. The data augmentation rate for the drug response prediction was set to $75 \%$ of the real sample. This ratio represented the generally ideal augmentation ratio obtained through the "searching optimal hyperparameter" experiment described later in section 6. For example, if the number of samples per label (resistant/sensitive) in the real data are $n$ and $m$ respectively, the number of samples per label in the synthetic sample will be $\frac{(n+m)}{2}$. The evaluation of the synthetic data is detailed in section 5.3. We measured the AUC values of the test set (PDX/TCGA) by using the parameters with the highest average AUC values in the validation set.
 
-Table~\ref{tab:1} presents an overview of the generalization performances of different baseline models and the proposed model for drug response predictions. Here, we use the following drug abbreviations: Pac: Paclitaxel, Erl: Erlotinib, Cet: Cetuximab, Doc: Docetaxel, Cis: Cisplatin, and Gem: Gemcitabine. The results revealed that the proposed \drdiff model obtained the highest AUC for all the drugs in the PDX benchmark dataset, except Erlotinib~(Erl), and the best performance for all the drugs on the TCGA benchmark dataset. Overall, the results suggested that the proposed method outperformed all the comparable baseline models, as evidenced by its higher average AUC of $0.79$ for all six datasets. This finding suggested that the proposed method had a strong potential for improving the accuracy of drug response predictions, especially on the PDX and TCGA benchmark datasets.
+\subsection*{5.2.2 Baselines}
+We evaluated the performance of several state-of-the-art methods for anti-cancer drug response prediction using multi-omics data. Specifically, three recently developed methods, MOLI, Super.FELT, and DeepInsight3D, were used as benchmarks for comparison. In addition to these methods, nonnegative matrix factorization (NMF), feedforward network (FFN), and the method proposed by Geeleher et al. [30] were included in the comparison analysis. Moreover, further comparison was conducted with other methods mentioned in a previous study [25], including the autoencoder (AE), artificial neural network after feature selection (ANNF), AutoBoruta Random Forest (ABRF), and support vector machine (SVM). Finally, we compared the proposed framework with TabNet [2], a common model used in similar tasks with tabular data.
 
-\begin{table}[!h]
-\centering
-  \begin{tabular}{|l|ccc|ccc|c|}
-    \hline
-    & \multicolumn{3}{c|}{PDX} & \multicolumn{3}{c|}{TCGA} & \\
-    \hline
-  Model & Pac & Cet & Erl & Doc & Cis & Gem & Avg \\
-    \hline
+\subsection*{5.2.3 Performance Comparison}
+Table 1 presents an overview of the generalization performances of different baseline models and the proposed model for drug response predictions. The results revealed that the proposed DrDiff model obtained the highest AUC for all the drugs in the PDX benchmark dataset, except erlotinib, and the best performance for all the drugs on the TCGA benchmark dataset. Overall, the results suggested that the proposed method outperformed all the comparable baseline models, as evidenced by its higher average AUC of 0.79 for all six datasets. This finding suggested that the proposed method had a strong potential for improving the accuracy of drug response predictions, especially on the PDX and TCGA benchmark datasets.
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{|l|l|l|l|l|l|l|l|}
+\hline
+ & \multicolumn{3}{|c|}{PDX} & \multicolumn{3}{|c|}{TCGA} &  \\
+\hline
+Model & Pac & Cet & Erl & Pac & Cet & Erl & Avg \\
+\hline
 NMF & 0.24 & 0.53 & 0.28 & 0.39 & 0.40 & 0.58 & 0.40 \\
+\hline
 FFN & 0.68 & 0.43 & 0.37 & 0.69 & 0.44 & 0.65 & 0.54 \\
+\hline
 Geeleher et al. & 0.52 & 0.58 & 0.67 & 0.59 & 0.62 & 0.53 & 0.58 \\
+\hline
 AE & 0.44 & 0.42 & 0.33 & 0.50 & 0.46 & 0.50 & 0.44 \\
+\hline
 ANNF & 0.64 & 0.43 & 0.65 & 0.64 & 0.68 & 0.57 & 0.60 \\
+\hline
 ABRF & 0.46 & 0.17 & 0.17 & 0.42 & 0.45 & 0.53 & 0.36 \\
+\hline
 SVM & 0.49 & 0.41 & 0.67 & 0.53 & 0.47 & 0.47 & 0.5 \\
+\hline
 TabNet & 0.51 & 0.51 & 0.58 & 0.50 & 0.50 & 0.50 & 0.51 \\
+\hline
 MOLI & 0.74 & 0.53 & 0.63 & 0.58 & 0.66 & 0.65 & 0.63 \\
+\hline
 Super.FELT & 0.64 & 0.55 & 0.76 & 0.64 & 0.73 & 0.61 & 0.65 \\
+\hline
 DeepInsight & 0.74 & 0.71 & 0.85 & 0.78 & 0.68 & 0.53 & 0.71 \\
 \hline
-\textbf{\drdiff~(No-Aug)} & 0.70 & 0.67 & 0.80 & 0.72 & \textbf{0.75} & \textbf{0.66} & 0.71 \\
-\textbf{\drdiff} & \textbf{0.78} & \textbf{0.82} & 0.83 & \textbf{0.83} & \textbf{0.81} & \textbf{0.72} & \textbf{0.78} \\
+DrDiff (No-Aug) & 0.70 & 0.67 & 0.80 & 0.72 & 0.75 & 0.66 & 0.71 \\
+\hline
+DrDiff & 0.78 & 0.82 & 0.83 & 0.83 & 0.81 & 0.72 & 0.78 \\
 \hline
 \end{tabular}
-\caption{Drug response prediction performance on the PDX and TCGA dataset.}
-\label{tab:1}
+\captionsetup{labelformat=empty}
+\caption{Table 1: Drug response prediction performance on the PDX and TCGA dataset.}
+\end{center}
 \end{table}
 
-Starting from the problem definition of those studies that showed poor
-generalization performance due to lack of training data, we
-investigated the ability of our proposed framework to predict drug
-responses without the data augmentation module to verify whether it
-performs worse without it. Additionally, this experiment enables a
-practical performance comparison with other baseline models when
-utilizing the graph attention network using subnetworks~(Section~\ref{sec:response}), another contribution proposed in this study, without data
-augmentation. Models trained solely on existing real data without
-augmentation exhibited lower performance for all six drugs compared
-to models trained with augmented data. This demonstrates that
-augmenting the training data improves generalization performance on the benchmark dataset, which is unseen data, and suggests that the augmented training data is appropriately crafted to assist in the downstream task of drug response prediction. Moreover, utilizing only the graph attention network, the third module proposed in the \drdiff framework, without augmentation, achieved higher drug response prediction performance than all baseline models for two out of three drugs in the TCGA dataset. These experimental results highlighted that the second module~(the data augmentation module) and third module~(the graph attention network module) in the \drdiff framework were critical to the overall generalization performance.
+Starting from the problem definition of those studies that showed poor generalization performance due to lack of training data, we investigated the ability of our proposed framework to predict drug responses without the data augmentation module to verify whether it performs worse without it. Additionally, this experiment enables a practical performance comparison with other baseline models when utilizing the graph attention network using subnetworks (Section 4.3), another contribution proposed in this study, without data augmentation. Models trained solely on existing real data without augmentation exhibited lower performance for all six drugs compared to models trained with augmented data. This demonstrates that augmenting the training data improves generalization performance on the benchmark dataset, which is unseen data, and suggests that the augmented training data is appropriately crafted to assist in the downstream task of drug response prediction. Moreover, utilizing only the graph attention network, the third module proposed in DrDiff framework, without augmentation, achieved higher drug response prediction performance than all baseline models for two out of three drugs in the TCGA dataset. These experimental results highlighted that the second module (the data augmentation module) and third module (the graph attention network module) in the DrDiff framework were critical to the overall generalization performance.
+
+\subsection*{5.3 Synthetic Data Quality}
+Through a previous experiment in Section 5.2.3, we confirmed that adding the data generated by the proposed augmentation technique to the training data resulted in an improved prediction performance on the benchmark dataset. However, it was unclear whether this performance improvement was solely due to the high-quality data generated. Therefore, in this section, we discuss the verification of whether the data generated by the augmentation module properly mimicked the distribution of real data.
+
+\subsection*{5.3.1 Experiment Setting}
+To conduct the experiment, we utilized the generative module with the hyperparameters discussed in section 5.2 to generate samples equivalent to that of the real samples in number. Then, for the quantitative evaluation of the sampling quality between that of the existing methods and the proposed method, we used four evaluation metrics inspired by previous study [12]: Kullback-Leibler divergence (KLD), Pairwise Difference, Log-Cluster, and Cosine Similarity. KLD was computed over a pair of real and synthetic marginal probability mass functions (PMFs) for a given variable, and the similarity between two PMFs was measured. The pairwise difference was measured as the Euclidean distance between each pair of real and synthetic data. The log-cluster metric measured the similarity of the underlying latent structures of the real and synthetic datasets in terms of clustering. Cosine similarity was computed as the similarity between the two nonzero vectors of an inner product space, and it measures the cosine of the angle between these vectors.
+
+\subsection*{5.3.2 Baselines}
+We compared our augmentation module with four tabular data generative models, except the image data generative models. The conditional variational autoencoder (CVAE) [32] is a generative model that learns to generate new data samples by mapping a set of conditional variables to the output data distribution. This extends the traditional VAE by incorporating a set of conditional variables to control the generation process. We utilized a CVAE with the KL annealing technique inspired by $\beta$-VAE [16]. Conditional tabular GAN (CTGAN) [36] is another generative model that generates synthetic tabular data by learning the data distribution from real data and utilizing the generator to produce synthetic data that closely resembles the original data in terms of statistical properties. Tabular VAE (TVAE) [36] is a specialized VAE model designed for tabular data that aims to learn a compact latent representation of the data for downstream tasks such as data generation and anomaly detection. Finally, CopulaGAN [26] is a generative model implemented in the Synthetic Data Vault library that employs copulas to capture complex multivariate dependencies in tabular data. This approach enables the generation of synthetic data with a statistical structure resembling that of the original data.
+
+\subsection*{5.3.3 Quantitative Evaluation}
+Using the evaluation metrics mentioned in section 5.3.1, we evaluated the quality of the generated data for real gene expression data for each of the six drugs as shown in Table 2. Subsequently, we derived the final performance of the model by calculating the average results of the four evaluation metrics for each drug. When comparing final performance under the four performance indicators for each model with the four baseline models and the proposed modules, our proposed model achieved significantly superior performance in terms of the KLD, pairwise distance, and cosine similarity metrics, except for the log-cluster metrics. This observation demonstrates that the proposed adeptly approximates the distribution of real-world data and effectively captures the interrelationships among features.
+
+\subsection*{5.3.4 Qualitative Evaluation}
+For the qualitative evaluation of the sampling diversity between the
+baseline generative model used in the quantitative evaluation and our
+proposed augmentation module, we conducted a t -SNE visualization
+comparison analysis between real and synthetic data as shown in Figure
+2a. When compared with the t SNE distribution of the real data, the
+data generated by the CTGAN and CopulaGAN models exhibited a
+significant difference in distribution owing to the excessive
+inclusion of nonexistent values. In contrast, the CVAE model generated
+data within the range of the actual data; however, its diversity was
+limited.
 
 % \begin{figure}[!h]
 %   \centering
@@ -471,10 +392,11 @@ augmenting the training data improves generalization performance on the benchmar
 
 \section{Conclusion}
 
+
 In this study, we propose a drug response prediction framework that overcomes the low sample size and high dimensionality of training data. To solve this problem, we performed feature selection to extract only important variables through the distance between a drug and target protein; employed data augmentation to generate gene expression data by modifying the latest generation model, DDPM; and utilized a graph attention network for drug response prediction using biological pathways as the a priori knowledge. The proposed framework showed a higher generalization performance on unseen patient datasets for drug response prediction than the performances of other baselines. Furthermore, the generation module that augmented the gene expression data also produced a higher sample quality than that produced by the other comparison models.
 
 \bibliographystyle{plainnat-revised}
-\bibliography{drgat}
+\bibliography{bibli}
 
 
 \end{document}
