@@ -281,9 +281,11 @@ def main(gpu_num,set_id,drug, External_data_name,hyperparameters_set,data_dir,sa
     return np.average(total_train_auc),np.average(total_test_auc),np.average(total_External_auc)
 
 
-drug_list = list(pd.read_csv('GDSC_drugs.csv',sep='\n')['drugs'])
-External_data_name_list = ['TCGA','PDX','CCLE','CTRP']
 
+
+#drug_list = list(pd.read_csv('GDSC_drugs.csv',sep='\n')['drugs'])
+drug_list = list(pd.read_csv('GDSC_drugs.csv')['drugs'])
+External_data_name_list = ['TCGA','PDX','CCLE','CTRP']
 
 hyperparameters_set_list = []
 hyperparameters_set1 = {'E_dr':0.1, 'C_dr':0.1,'Cwd':0.0,'Ewd':0.0, 'E_epoch':10 ,'CL_epoch':5}
