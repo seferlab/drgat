@@ -18,6 +18,15 @@ conda activate drgat
 pip install -r requirements.txt
 ```
 
+Or
+
+### 1) Create environment
+```bash
+conda create -n drgat python=3.13 -y
+conda activate drgat
+pip install -r requirements.txt
+```
+
 ### 2) Download data
 ```bash
 python run_pipeline_data.py download --zenodo-record 4036592 --data-dir data/raw
