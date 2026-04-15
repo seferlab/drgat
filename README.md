@@ -1,4 +1,4 @@
-# DRGAT: Diffusion-based Graph Attention for Drug Response Prediction
+# Diffusion-based Graph Attention for Drug Response Prediction
 
 It implements the end-to-end pipeline described in the paper:
 1. **Pathway/feature selection** via proximity of drug targets to biological pathways (shortest-path distance, z-scored with degree-matched bootstraps)
